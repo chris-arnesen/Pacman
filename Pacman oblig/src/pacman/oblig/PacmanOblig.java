@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javafxapplication10;
-
+package pacman.oblig;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,7 +18,7 @@ import javafx.stage.Stage;
  *
  * @author christofferstrandarnesen
  */
-public class JavaFXApplication10 extends Application {
+public class PacmanOblig extends Application {
     
     
     BorderPane bPane;
