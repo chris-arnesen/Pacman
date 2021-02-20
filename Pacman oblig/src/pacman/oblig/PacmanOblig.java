@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package pacman.oblig;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -31,6 +36,8 @@ public class PacmanOblig extends Application {
     Pane bottom = getBottom();
     Text score = getScore();
     Text level = getLevel();
+    
+    int pointerX = 0, pointerY = 0;
     
     
     @Override
@@ -50,6 +57,38 @@ public class PacmanOblig extends Application {
         primaryStage.setTitle("Pacman");
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        // Ikke gjort om til en metode enda, må lage en center-box som denne kan
+        // putte "banen" inn i
+        Scanner leser = null;
+        try{
+            File fil = new File("pacman-kart.txt");
+            leser = new Scanner(fil);
+            while ( leser.hasNextLine() ) {
+                String linje = leser.nextLine();
+                for (int i = 0; i < linje.length(); i++ ) {
+                    char c = linje.charAt(i);
+                    System.out.print(c);
+                    if ( c == 'x' ) {
+                        Rectangle s = new Rectangle(pointerX, pointerY, 10,10);
+                        bPane.getChildren().add(s);
+                        pointerX+=10;
+                    } else if(c == '-'){
+                        Circle s = new Circle(pointerX+(10/2),pointerY+(10/2),2);
+                        bPane.getChildren().add(s);
+                        pointerX+=10;
+                    } else
+                        pointerX+=10;
+                        
+                        
+                } //Slutt på for-løkke
+                pointerY+=10;
+                pointerX=0;
+            } //Slutt på while-løkke
+        
+            leser.close();
+        } catch (FileNotFoundException e) {
+        System.out.println("fant ikke fil");}
         
        
     }
