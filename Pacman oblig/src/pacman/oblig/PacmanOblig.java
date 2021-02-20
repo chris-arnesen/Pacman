@@ -11,7 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -22,24 +27,23 @@ public class PacmanOblig extends Application {
     
     
     BorderPane bPane;
+    Pane top = getTop();
+    Pane bottom = getBottom();
+    Text score = getScore();
+    Text level = getLevel();
     
     
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
+      
         
         //Borderpane
         BorderPane bPane = new BorderPane();
-        bPane.setTop(getTop());
-       
+        bPane.setTop(top);
+        bPane.setBottom(bottom);
+        
+        top.getChildren().add(score);
+        top.getChildren().add(level);
         
         Scene scene = new Scene(bPane, 500, 500);
         
@@ -51,12 +55,43 @@ public class PacmanOblig extends Application {
     }
     
     
-        //Metoder
-        public HBox getTop() {
-        HBox hbox = new HBox ();
-        hbox.setPrefHeight(50);
-        return hbox;
+        //Pane top
+        public Pane getTop() {
+        Pane pane = new Pane();
+        pane.setPrefHeight(50);
+        pane.setStyle("-fx-border-color: black; -fx-background-color: darkblue;");
+        return pane;
     }
+        
+        //Pane bottom
+        public Pane getBottom() {
+        Pane pane = new Pane();
+        pane.setPrefHeight(50);
+        pane.setStyle("-fx-border-color: black; -fx-background-color: darkblue;");
+        return pane;
+    }
+        
+        //Score counter
+        public Text getScore() {
+            Text text = new Text("Score: ");
+        text.setFont(Font.font("Arial", 20));
+               text.setLayoutX(10);
+               text.setLayoutY(30);
+               text.setFill(Color.WHITE);
+        return text;
+        }
+        
+        //Level counter
+        public Text getLevel() {
+            Text text = new Text("Level: ");
+        text.setFont(Font.font("Arial", 20));
+               text.setLayoutX(410);
+               text.setLayoutY(30);
+               text.setFill(Color.WHITE);
+        return text;
+        }
+        
+        
 
     /**
      * @param args the command line arguments
