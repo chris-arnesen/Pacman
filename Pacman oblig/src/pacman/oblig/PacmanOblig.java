@@ -7,6 +7,7 @@ package pacman.oblig;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -53,6 +54,10 @@ public class PacmanOblig extends Application {
         bPane.setBottom(bottom);
         bPane.setCenter(center);
         
+        Circle pacman= getPacman();
+        
+        center.getChildren().add(pacman);
+        
         
         Scene scene = new Scene(bPane, width, height);
         
@@ -62,10 +67,51 @@ public class PacmanOblig extends Application {
         
         // Ikke gjort om til en metode enda, må lage en center-box som denne kan
         // putte "banen" inn i
-       
+        
+        TranslateTransition transition = new TranslateTransition(); /*
+        transition.setToX(700);
+        transition.setToY(700);*/
+        transition.setNode(pacman);
+        //transition.play();
+        
+       scene.setOnKeyPressed(e -> {
+    switch (e.getCode()) {
+    case UP:
+        transition.setToY(0);
+        transition.play();
+        break;
+    case LEFT:
+         transition.setToX(0);
+         transition.play();
+        break;
+    case DOWN:
+        transition.setToY(height-STR);
+        transition.play();
+        break;
+    case RIGHT:
+        transition.setToX(width-STR);
+        transition.play();
+        break;
+    }
+});
         
        
     }
+    
+        //Pacman figur
+    public Circle getPacman() {
+        int dx = STR/2;
+        int dy = STR/2;
+        int radius = STR;
+        Circle pacman = new Circle(radius, dx, dy);
+        pacman.setFill(Color.YELLOW);
+        
+        return pacman;
+    }
+       
+        
+       
+    
         
         
     /**
