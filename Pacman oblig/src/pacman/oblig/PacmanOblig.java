@@ -34,8 +34,10 @@ public class PacmanOblig extends Application {
     BorderPane bPane;
     Pane top = getTop();
     Pane bottom = getBottom();
+    Pane center = getCenter();
     Text score = getScore();
     Text level = getLevel();
+    Scanner map = getMap();
     
     int pointerX = 0, pointerY = 0;
     
@@ -48,11 +50,13 @@ public class PacmanOblig extends Application {
         BorderPane bPane = new BorderPane();
         bPane.setTop(top);
         bPane.setBottom(bottom);
+        bPane.setCenter(center);
         
         top.getChildren().add(score);
         top.getChildren().add(level);
         
-        Scene scene = new Scene(bPane, 500, 500);
+        
+        Scene scene = new Scene(bPane, 700, 700);
         
         primaryStage.setTitle("Pacman");
         primaryStage.setScene(scene);
@@ -60,35 +64,7 @@ public class PacmanOblig extends Application {
         
         // Ikke gjort om til en metode enda, må lage en center-box som denne kan
         // putte "banen" inn i
-        Scanner leser = null;
-        try{
-            File fil = new File("pacman-kart.txt");
-            leser = new Scanner(fil);
-            while ( leser.hasNextLine() ) {
-                String linje = leser.nextLine();
-                for (int i = 0; i < linje.length(); i++ ) {
-                    char c = linje.charAt(i);
-                    System.out.print(c);
-                    if ( c == 'x' ) {
-                        Rectangle s = new Rectangle(pointerX, pointerY, 10,10);
-                        bPane.getChildren().add(s);
-                        pointerX+=10;
-                    } else if(c == '-'){
-                        Circle s = new Circle(pointerX+(10/2),pointerY+(10/2),2);
-                        bPane.getChildren().add(s);
-                        pointerX+=10;
-                    } else
-                        pointerX+=10;
-                        
-                        
-                } //Slutt på for-løkke
-                pointerY+=10;
-                pointerX=0;
-            } //Slutt på while-løkke
-        
-            leser.close();
-        } catch (FileNotFoundException e) {
-        System.out.println("fant ikke fil");}
+       
         
        
     }
@@ -107,6 +83,14 @@ public class PacmanOblig extends Application {
         Pane pane = new Pane();
         pane.setPrefHeight(50);
         pane.setStyle("-fx-border-color: black; -fx-background-color: darkblue;");
+        return pane;
+    }
+        
+       //Pane center
+        public Pane getCenter() {
+        Pane pane = new Pane();
+        pane.setPrefHeight(600);
+        pane.setStyle("-fx-border-color: black; -fx-background-color: white;");
         return pane;
     }
         
@@ -130,7 +114,43 @@ public class PacmanOblig extends Application {
         return text;
         }
         
+        //Scanner metode
+        public Scanner getMap() {
+             Scanner leser = null;
+             
+        try{
+          File fil = new File("pacman-kart.txt");
+            leser = new Scanner(fil);
+            while ( leser.hasNextLine() ) {
+                String linje = leser.nextLine();
+                for (int i = 0; i < linje.length(); i++ ) {
+                    char c = linje.charAt(i);
+                    System.out.print(c);
+                    if ( c == 'x' ) {
+                        Rectangle s = new Rectangle(pointerX, pointerY, 10,10);
+                        center.getChildren().add(s);
+                        pointerX+=10;
+                    } else if(c == '-'){
+                        Circle s = new Circle(pointerX+(10/2),pointerY+(10/2),2);
+                        center.getChildren().add(s);
+                        pointerX+=10;
+                    } else
+                        pointerX+=10;
+                        
+                        
+                } //Slutt på for-løkke
+                pointerY+=10;
+                pointerX=0;
+            } //Slutt på while-løkke
         
+            
+            
+            leser.close();
+        } catch (FileNotFoundException e) {
+        System.out.println("fant ikke fil");}
+        
+        return leser;
+        } 
 
     /**
      * @param args the command line arguments
