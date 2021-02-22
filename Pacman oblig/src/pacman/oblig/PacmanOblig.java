@@ -30,33 +30,31 @@ import javafx.stage.Stage;
  */
 public class PacmanOblig extends Application {
     
+    //Deklarasjoner
+    int STR    = 20;
+    int width  = STR*28;
+    int height = (STR*31)+100;
     
+    
+    
+    //Diverse bokser
     BorderPane bPane;
-    Pane top = getTop();
-    Pane bottom = getBottom();
-    Pane center = getCenter();
-    Text score = getScore();
-    Text level = getLevel();
-    Scanner map = getMap();
-    
-    int pointerX = 0, pointerY = 0;
+    topPane top = new topPane();
+    bottomPane bottom = new bottomPane();
+    centerPane center = new centerPane(STR);
     
     
     @Override
     public void start(Stage primaryStage) {
       
-        
         //Borderpane
         BorderPane bPane = new BorderPane();
         bPane.setTop(top);
         bPane.setBottom(bottom);
         bPane.setCenter(center);
         
-        top.getChildren().add(score);
-        top.getChildren().add(level);
         
-        
-        Scene scene = new Scene(bPane, 700, 700);
+        Scene scene = new Scene(bPane, width, height);
         
         primaryStage.setTitle("Pacman");
         primaryStage.setScene(scene);
@@ -68,89 +66,8 @@ public class PacmanOblig extends Application {
         
        
     }
-    
-    
-        //Pane top
-        public Pane getTop() {
-        Pane pane = new Pane();
-        pane.setPrefHeight(50);
-        pane.setStyle("-fx-border-color: black; -fx-background-color: darkblue;");
-        return pane;
-    }
         
-        //Pane bottom
-        public Pane getBottom() {
-        Pane pane = new Pane();
-        pane.setPrefHeight(50);
-        pane.setStyle("-fx-border-color: black; -fx-background-color: darkblue;");
-        return pane;
-    }
         
-       //Pane center
-        public Pane getCenter() {
-        Pane pane = new Pane();
-        pane.setPrefHeight(600);
-        pane.setStyle("-fx-border-color: black; -fx-background-color: white;");
-        return pane;
-    }
-        
-        //Score counter
-        public Text getScore() {
-            Text text = new Text("Score: ");
-        text.setFont(Font.font("Arial", 20));
-               text.setLayoutX(10);
-               text.setLayoutY(30);
-               text.setFill(Color.WHITE);
-        return text;
-        }
-        
-        //Level counter
-        public Text getLevel() {
-            Text text = new Text("Level: ");
-        text.setFont(Font.font("Arial", 20));
-               text.setLayoutX(410);
-               text.setLayoutY(30);
-               text.setFill(Color.WHITE);
-        return text;
-        }
-        
-        //Scanner metode
-        public Scanner getMap() {
-             Scanner leser = null;
-             
-        try{
-          File fil = new File("pacman-kart.txt");
-            leser = new Scanner(fil);
-            while ( leser.hasNextLine() ) {
-                String linje = leser.nextLine();
-                for (int i = 0; i < linje.length(); i++ ) {
-                    char c = linje.charAt(i);
-                    if ( c == 'x' ) {
-                        Rectangle s = new Rectangle(pointerX, pointerY, 10,10);
-                        center.getChildren().add(s);
-                        pointerX+=10;
-                    } else if(c == '-'){
-                        Circle s = new Circle(pointerX+(10/2),pointerY+(10/2),2);
-                        center.getChildren().add(s);
-                        pointerX+=10;
-                    } else
-                        pointerX+=10;
-                        
-                        
-                } //Slutt på for-løkke
-                pointerY+=10;
-                pointerX=0;
-            } //Slutt på while-løkke
-        
-            
-            
-            leser.close();
-        } catch (FileNotFoundException e) {
-        System.out.println("fant ikke fil");}
-        
-        return leser;
-        } 
-
     /**
      * @param args the command line arguments
      */
@@ -159,4 +76,3 @@ public class PacmanOblig extends Application {
     }
     
 }
-barmenasdasdas  asdasdasd

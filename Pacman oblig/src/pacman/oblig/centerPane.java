@@ -18,13 +18,13 @@ import javafx.scene.shape.Rectangle;
  */
 public class centerPane extends Pane {
     
+    int width = 500;
+    int STR;
     
-    protected int height = (500/28)*31;
-    protected int STR = 500/28;
     
-    
-    public centerPane() {
-        this.setPrefHeight(height);
+    public centerPane(int STR) {
+        this.STR = STR;
+        this.setPrefHeight(STR*31);
         this.setStyle("-fx-border-color: black; -fx-background-color: white;");
         getMap();
     }
@@ -46,7 +46,7 @@ public class centerPane extends Pane {
                         this.getChildren().add(s);
                         pointerX+=STR;
                     } else if(c == '-'){
-                        Circle s = new Circle(pointerX+(10/2),pointerY+(10/2),2);
+                        Circle s = new Circle(pointerX+(STR/2),pointerY+(STR/2),2);
                         this.getChildren().add(s);
                         pointerX+=STR;
                     } else
