@@ -81,15 +81,15 @@ public class PacmanOblig extends Application {
         transition.play();
         break;
     case LEFT:
-         transition.setToX(0);
+         transition.setToX(-STR/2);
          transition.play();
         break;
     case DOWN:
-        transition.setToY(height-STR);
+        transition.setToY(height-STR*6);
         transition.play();
         break;
     case RIGHT:
-        transition.setToX(width-STR);
+        transition.setToX(width-STR-STR/2);
         transition.play();
         break;
     }
