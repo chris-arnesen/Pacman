@@ -81,7 +81,7 @@ public class Main extends Application {
         transition.play();
         break;
     case LEFT:
-         transition.setToX(-STR/2);
+         transition.setToX(STR-STR);
          transition.play();
         break;
     case DOWN:
@@ -89,7 +89,7 @@ public class Main extends Application {
         transition.play();
         break;
     case RIGHT:
-        transition.setToX(width-STR-STR/2);
+        transition.setToX(width-STR);
         transition.play();
         break;
     }
