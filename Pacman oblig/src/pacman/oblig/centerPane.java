@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import javafx.scene.layout.Pane;
+import static javafx.scene.paint.Color.BLUE;
+import static javafx.scene.paint.Color.YELLOW;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
@@ -25,7 +27,7 @@ public class centerPane extends Pane {
     public centerPane(int STR) {
         this.STR = STR;
         this.setPrefHeight(STR*31);
-        this.setStyle("-fx-border-color: black; -fx-background-color: white;");
+        this.setStyle("-fx-border-color: black; -fx-background-color: black;");
         getMap();
     }
     
@@ -43,14 +45,20 @@ public class centerPane extends Pane {
                     char c = linje.charAt(i);
                     if ( c == 'x' ) {
                         Rectangle s = new Rectangle(pointerX, pointerY, STR,STR);
+                        s.setFill(BLUE);
                         this.getChildren().add(s);
                         pointerX+=STR;
                     } else if(c == '-'){
-                        Circle s = new Circle(pointerX+(STR/2),pointerY+(STR/2),2);
+                        Circle s = new Circle(pointerX+(STR/2),pointerY+(STR/2),2, YELLOW);
+                        this.getChildren().add(s);
+                        pointerX+=STR;
+                    } else if( c == 'o'){
+                        Circle s = new Circle(pointerX+(STR/2), pointerY+(STR/2), 5, YELLOW);
                         this.getChildren().add(s);
                         pointerX+=STR;
                     } else
                         pointerX+=STR;
+                        
                         
                         
                 } //Slutt på for-løkke
