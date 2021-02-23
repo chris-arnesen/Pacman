@@ -29,7 +29,7 @@ import javafx.stage.Stage;
  *
  * @author christofferstrandarnesen
  */
-public class PacmanOblig extends Application {
+public class Main extends Application {
     
     //Deklarasjoner
     int STR    = 20;
@@ -54,9 +54,9 @@ public class PacmanOblig extends Application {
         bPane.setBottom(bottom);
         bPane.setCenter(center);
         
-        Circle pacman= getPacman();
-        
-        center.getChildren().add(pacman);
+        pacman player = new pacman();
+        center.getChildren().add(player);
+       
         
         
         Scene scene = new Scene(bPane, width, height);
@@ -71,7 +71,7 @@ public class PacmanOblig extends Application {
         TranslateTransition transition = new TranslateTransition(); /*
         transition.setToX(700);
         transition.setToY(700);*/
-        transition.setNode(pacman);
+        transition.setNode(player);
         //transition.play();
         
        scene.setOnKeyPressed(e -> {
@@ -98,16 +98,7 @@ public class PacmanOblig extends Application {
        
     }
     
-        //Pacman figur
-    public Circle getPacman() {
-        int dx = STR/2;
-        int dy = STR/2;
-        int radius = STR;
-        Circle pacman = new Circle(radius, dx, dy);
-        pacman.setFill(Color.YELLOW);
-        
-        return pacman;
-    }
+   
        
         
        
