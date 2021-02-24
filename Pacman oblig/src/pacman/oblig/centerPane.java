@@ -24,7 +24,7 @@ public class centerPane extends Pane {
     
     static ArrayList<Rectangle> sperringer = new ArrayList<>(); //Skal inneholde alle firkanter/"sperringer" 
     static ArrayList<Circle> dotter = new ArrayList<>(); //Skal inneholde alle prikkene på kartet
-    
+    static pacman player; 
     
     public centerPane() {
         this.setPrefHeight(Main.getSTR()*31);
@@ -74,6 +74,7 @@ public class centerPane extends Pane {
                             }
                         case 'p':
                             //Her kommer pacman
+                            player = new pacman();
                             pointerX+=STR;
                             break;
                         default:
@@ -96,5 +97,6 @@ public class centerPane extends Pane {
     //Get-metode for arraylisten over alle sperringer
     public static ArrayList<Rectangle> getSperringer() {return sperringer;} 
     public static ArrayList<Circle> getDotter() {return dotter;}
+    public static pacman getPlayer() {return player;}
     
 }

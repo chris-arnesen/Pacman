@@ -58,7 +58,8 @@ public class Main extends Application {
         bPane.setBottom(bottom);
         bPane.setCenter(center);
         
-        pacman player = new pacman();
+        //pacman player = new pacman();
+        pacman player = centerPane.getPlayer();
         center.getChildren().add(player);
         
        

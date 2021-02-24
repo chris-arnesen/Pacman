@@ -21,7 +21,7 @@ xxxxxx-xx xxxxxxxx xx-xxxxxx
 x------------xx------------x
 x-xxxx-xxxxx-xx-xxxxx-xxxx-x
 x-xxxx-xxxxx-xx-xxxxx-xxxx-x
-xo--xx----------------xx--ox
+xo--xx-------p -------xx--ox
 xxx-xx-xx-xxxxxxxx-xx-xx-xxx
 xxx-xx-xx-xxxxxxxx-xx-xx-xxx
 x------xx----xx----xx------x

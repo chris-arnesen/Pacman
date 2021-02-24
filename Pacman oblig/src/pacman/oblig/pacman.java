@@ -20,9 +20,10 @@ public class pacman extends Circle {
     //int width  = STR*28;
     //int height = (STR*31)+100;
     
-    int x, y;
+    double x = 280, y = 470;
+    double radius = Main.getSTR()/2; 
         //Pacman figur
-    public pacman() {
+    /*public pacman() {
         double x = 280;
         double y = 470;
         double radius = Main.getSTR()/2;
@@ -30,8 +31,21 @@ public class pacman extends Circle {
         this.setCenterX(x);
         this.setCenterY(y);
         this.setFill(Color.YELLOW);  
+    }*/
+    
+    public pacman() {
+        this.setRadius(this.radius);
+        this.setCenterX(this.x);
+        this.setCenterY(this.y);
+        this.setFill(Color.YELLOW);
     }
     
-    //public pacman() {}
+    //Set- og get-metoder
+    public void setPacmanX(double x) {this.x = x;}
+    public void setPacmanY(double y) {this.y = y;}
+    
+    public double getPacmanX() {return x;}
+    public double getPacmanY() {return y;}
+    public double getPacmanRadius() {return radius;}
     
 }
