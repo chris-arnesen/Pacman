@@ -24,7 +24,8 @@ public class centerPane extends Pane {
     int width = 500;
     int STR;
     
-    ArrayList<Rectangle> sperringer; //Skal inneholde alle firkanter/"sperringer" 
+    static ArrayList<Rectangle> sperringer = new ArrayList<>(); //Skal inneholde alle firkanter/"sperringer" 
+    static ArrayList<Circle> dotter = new ArrayList<>(); //Skal inneholde alle prikkene på kartet
     
     
     public centerPane(int STR) {
@@ -32,6 +33,7 @@ public class centerPane extends Pane {
         this.setPrefHeight(STR*31);
         this.setStyle("-fx-border-color: black; -fx-background-color: black;");
         getMap();
+        
     }
     
     //Metode som leser inn kartet(banen)
@@ -40,7 +42,7 @@ public class centerPane extends Pane {
              int pointerX = 0, pointerY = 0;
              
         try{
-          sperringer = new ArrayList<>();  
+          //sperringer = new ArrayList<>();  
           File fil = new File("pacman-kart.txt");
             leser = new Scanner(fil);
             while ( leser.hasNextLine() ) {
@@ -55,11 +57,14 @@ public class centerPane extends Pane {
                         pointerX+=STR;
                     } else if(c == '-'){
                         Circle s = new Circle(pointerX+(STR/2),pointerY+(STR/2),2, YELLOW);
+                        dotter.add(s);
                         this.getChildren().add(s);
                         pointerX+=STR;
                     } else if( c == 'o'){
                         Circle s = new Circle(pointerX+(STR/2), pointerY+(STR/2), 5, YELLOW);
                         this.getChildren().add(s);
+                        pointerX+=STR;
+                    } else if (c == 'p') {
                         pointerX+=STR;
                     } else
                         pointerX+=STR;      
@@ -77,7 +82,7 @@ public class centerPane extends Pane {
         } 
     
     //Get-metode for arraylisten over alle sperringer
-    public ArrayList getSperringer() {return sperringer;} 
-    
+    public static ArrayList<Rectangle> getSperringer() {return sperringer;} 
+    public static ArrayList<Circle> getDotter() {return dotter;}
     
 }
