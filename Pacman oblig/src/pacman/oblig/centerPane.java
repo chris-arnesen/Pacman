@@ -21,16 +21,13 @@ import javafx.scene.shape.Rectangle;
  */
 public class centerPane extends Pane {
     
-    int width = 500;
-    int STR;
     
     static ArrayList<Rectangle> sperringer = new ArrayList<>(); //Skal inneholde alle firkanter/"sperringer" 
     static ArrayList<Circle> dotter = new ArrayList<>(); //Skal inneholde alle prikkene på kartet
     
     
-    public centerPane(int STR) {
-        this.STR = STR;
-        this.setPrefHeight(STR*31);
+    public centerPane() {
+        this.setPrefHeight(Main.getSTR()*31);
         this.setStyle("-fx-border-color: black; -fx-background-color: black;");
         getMap();
         
@@ -40,6 +37,7 @@ public class centerPane extends Pane {
     public Scanner getMap() {
              Scanner leser = null;
              int pointerX = 0, pointerY = 0;
+             double STR = Main.getSTR();
              
         try{
           //sperringer = new ArrayList<>();  
@@ -49,25 +47,39 @@ public class centerPane extends Pane {
                 String linje = leser.nextLine();
                 for (int i = 0; i < linje.length(); i++ ) {
                     char c = linje.charAt(i);
-                    if ( c == 'x' ) {
-                        Rectangle s = new Rectangle(pointerX, pointerY, STR,STR);
-                        s.setFill(BLUE);
-                        sperringer.add(s); // Legger til firkant i arraylisten "sperringer"
-                        this.getChildren().add(s); // Legger til firkanten på centerPanet
-                        pointerX+=STR;
-                    } else if(c == '-'){
-                        Circle s = new Circle(pointerX+(STR/2),pointerY+(STR/2),2, YELLOW);
-                        dotter.add(s);
-                        this.getChildren().add(s);
-                        pointerX+=STR;
-                    } else if( c == 'o'){
-                        Circle s = new Circle(pointerX+(STR/2), pointerY+(STR/2), 5, YELLOW);
-                        this.getChildren().add(s);
-                        pointerX+=STR;
-                    } else if (c == 'p') {
-                        pointerX+=STR;
-                    } else
-                        pointerX+=STR;      
+                    switch (c) {
+                        case 'x':
+                            {
+                                Rectangle s = new Rectangle(pointerX, pointerY, STR,STR);
+                                s.setFill(BLUE);
+                                sperringer.add(s); // Legger til firkant i arraylisten "sperringer"
+                                this.getChildren().add(s); // Legger til firkanten på centerPanet
+                                pointerX+=STR;
+                                break;
+                            }
+                        case '-':
+                            {
+                                Circle s = new Circle(pointerX+(STR/2),pointerY+(STR/2),2, YELLOW);
+                                dotter.add(s);
+                                this.getChildren().add(s);
+                                pointerX+=STR;
+                                break;
+                            }
+                        case 'o':      
+                            {
+                                Circle s = new Circle(pointerX+(STR/2), pointerY+(STR/2), 5, YELLOW);
+                                this.getChildren().add(s);
+                                pointerX+=STR;
+                                break;
+                            }
+                        case 'p':
+                            //Her kommer pacman
+                            pointerX+=STR;
+                            break;
+                        default:
+                            pointerX+=STR;
+                            break;
+                    }
                 } //Slutt på for-løkke
                 pointerY+=STR;
                 pointerX=0;

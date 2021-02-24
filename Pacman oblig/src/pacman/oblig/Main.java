@@ -36,9 +36,9 @@ import javafx.util.Duration;
 public class Main extends Application {
     
     //Deklarasjoner
-    int STR    = 20;
-    int width  = STR*28;
-    int height = (STR*31)+100;
+    static int STR    = 20;
+    static int width  = STR*28;
+    static int height = (STR*31)+100;
     
     
     
@@ -46,7 +46,7 @@ public class Main extends Application {
     BorderPane bPane;
     topPane top = new topPane();
     bottomPane bottom = new bottomPane();
-    centerPane center = new centerPane(STR);
+    centerPane center = new centerPane();
     
     
     @Override
@@ -118,6 +118,8 @@ public class Main extends Application {
     
 });
        
+   
+   
   
 
 
@@ -125,6 +127,11 @@ public class Main extends Application {
         
        
     }
+    
+    //Get-metoder for forskjellige størrelser
+    public static double getWidth()  {return width;}
+    public static double getSTR()    {return STR;}
+    public static double getHeight() {return height;}
     
    
        

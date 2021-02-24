@@ -15,20 +15,23 @@ import javafx.scene.shape.Circle;
  */
 
 public class pacman extends Circle {
-    int STR    = 20;
-    int width  = STR*28;
-    int height = (STR*31)+100;
+    //Disse trengs ikke, bruk heller getSTR(), getHeight(), getWidth()
+    //int STR    = 20;
+    //int width  = STR*28;
+    //int height = (STR*31)+100;
     
-    
+    int x, y;
         //Pacman figur
     public pacman() {
-        int x = 280;
-        int y = 470;
-        int radius = STR/2;
+        double x = 280;
+        double y = 470;
+        double radius = Main.getSTR()/2;
         this.setRadius(radius);
         this.setCenterX(x);
         this.setCenterY(y);
-        this.setFill(Color.YELLOW);
-       
+        this.setFill(Color.YELLOW);  
     }
+    
+    //public pacman() {}
+    
 }
