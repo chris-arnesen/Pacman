@@ -19,8 +19,8 @@ public class pacman extends Circle {
     //int STR    = 20;
     //int width  = STR*28;
     //int height = (STR*31)+100;
-    
-    double x = 280, y = 470;
+    double x, y;
+    //double x = 280, y = 470;
     double radius = Main.getSTR()/2; 
         //Pacman figur
     /*public pacman() {
@@ -33,10 +33,10 @@ public class pacman extends Circle {
         this.setFill(Color.YELLOW);  
     }*/
     
-    public pacman() {
+    public pacman(double x, double y) {
         this.setRadius(this.radius);
-        this.setCenterX(this.x);
-        this.setCenterY(this.y);
+        this.setCenterX(x);
+        this.setCenterY(y);
         this.setFill(Color.YELLOW);
     }
     

@@ -74,7 +74,7 @@ public class centerPane extends Pane {
                             }
                         case 'p':
                             //Her kommer pacman
-                            player = new pacman();
+                            player = new pacman(pointerX+STR, pointerY+(STR/2));
                             pointerX+=STR;
                             break;
                         default:
