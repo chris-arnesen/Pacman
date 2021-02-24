@@ -5,16 +5,29 @@
  */
 package pacman.oblig;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
+import javafx.animation.PathTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.SequentialTransition;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.util.Duration;
 
 /**
  *
  * @author christofferstrandarnesen
  */
 
-public class pacman extends Circle {
+public class pacman extends Arc {
     //Disse trengs ikke, bruk heller getSTR(), getHeight(), getWidth()
     //int STR    = 20;
     //int width  = STR*28;
@@ -34,10 +47,41 @@ public class pacman extends Circle {
     }*/
     
     public pacman(double x, double y) {
-        this.setRadius(this.radius);
+        //this.setRadius(this.radius);
+        //this.setCenterX(x);
+        //this.setCenterY(y);
+        //this.setFill(Color.YELLOW);
+        
         this.setCenterX(x);
         this.setCenterY(y);
-        this.setFill(Color.YELLOW);
+        this.setRadiusX(this.radius);
+        this.setRadiusY(this.radius);
+        this.setStartAngle(40);
+        this.setLength(300);
+
+    this.setStroke(Color.BLACK);
+    this.setFill(Color.YELLOW);
+    this.setType(ArcType.ROUND);
+    
+
+    Timeline gaping = new Timeline();
+    gaping.setCycleCount(Timeline.INDEFINITE);
+    gaping.setAutoReverse(true);
+    KeyValue vinkel = new KeyValue(
+      this.startAngleProperty(), 0);
+    KeyValue bue = new KeyValue(
+      this.lengthProperty(), 360);
+    KeyFrame kf = new KeyFrame(
+      Duration.millis(500), vinkel, bue);
+    gaping.getKeyFrames().add(kf);
+    
+    
+    // Sekvensiell utførelse bevegelser og rotasjoner    
+     ParallelTransition animasjon=new ParallelTransition();
+    animasjon.getChildren().add(gaping);
+    animasjon.play();
+    
+  
     }
     
     //Set- og get-metoder
@@ -47,5 +91,6 @@ public class pacman extends Circle {
     public double getPacmanX() {return x;}
     public double getPacmanY() {return y;}
     public double getPacmanRadius() {return radius;}
+     
     
 }

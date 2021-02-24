@@ -9,6 +9,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
@@ -21,6 +24,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -62,6 +67,8 @@ public class Main extends Application {
         pacman player = centerPane.getPlayer();
         center.getChildren().add(player);
         
+        
+        
        
         
         
@@ -71,7 +78,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         
-       
+     
      
        Timeline opp = new Timeline();
        Timeline venstre = new Timeline();
@@ -95,6 +102,7 @@ public class Main extends Application {
         KeyFrame kf2 = new KeyFrame(Duration.millis(1000), kv2);
         venstre.getKeyFrames().add(kf2); 
         venstre.play();
+        
         break;
     case DOWN:
         KeyValue kv3 = new KeyValue(player.translateYProperty(),height-STR*30);
@@ -108,8 +116,7 @@ public class Main extends Application {
         høyre.getKeyFrames().add(kf4); 
         høyre.play();
         break;
-        case SPACE:
-        
+   case SPACE:
         ned.stop();
          System.out.println(player.getLayoutX() + "," + player.getLayoutY());
         break;
