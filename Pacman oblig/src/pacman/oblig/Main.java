@@ -7,6 +7,9 @@ package pacman.oblig;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -24,6 +27,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  *
@@ -56,6 +60,7 @@ public class Main extends Application {
         
         pacman player = new pacman();
         center.getChildren().add(player);
+        
        
         
         
@@ -65,35 +70,58 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        // Ikke gjort om til en metode enda, må lage en center-box som denne kan
-        // putte "banen" inn i
-        
-        TranslateTransition transition = new TranslateTransition(); /*
-        transition.setToX(700);
-        transition.setToY(700);*/
-        transition.setNode(player);
-        //transition.play();
-        
-       scene.setOnKeyPressed(e -> {
+       
+     
+       Timeline opp = new Timeline();
+       Timeline venstre = new Timeline();
+       Timeline ned = new Timeline();
+       Timeline høyre = new Timeline();
+     
+
+      
+       
+   scene.setOnKeyPressed(e -> {        
     switch (e.getCode()) {
+        
     case UP:
-        transition.setToY(0);
-        transition.play();
+        KeyValue kv1 = new KeyValue(player.translateYProperty(),-height+STR*14);
+        KeyFrame kf1 = new KeyFrame(Duration.millis(1000), kv1);
+        opp.getKeyFrames().add(kf1); 
+        opp.play();
         break;
     case LEFT:
-         transition.setToX(STR-STR);
-         transition.play();
+        KeyValue kv2 = new KeyValue(player.translateXProperty(),-width/2+STR+STR/2);
+        KeyFrame kf2 = new KeyFrame(Duration.millis(1000), kv2);
+        venstre.getKeyFrames().add(kf2); 
+        venstre.play();
         break;
     case DOWN:
-        transition.setToY(height-STR*6);
-        transition.play();
+        KeyValue kv3 = new KeyValue(player.translateYProperty(),height-STR*30);
+        KeyFrame kf3 = new KeyFrame(Duration.millis(1000), kv3);
+        ned.getKeyFrames().add(kf3); 
+        ned.play();
         break;
     case RIGHT:
-        transition.setToX(width-STR);
-        transition.play();
+        KeyValue kv4 = new KeyValue(player.translateXProperty(),width/2-STR-STR/2);
+        KeyFrame kf4 = new KeyFrame(Duration.millis(1000), kv4);
+        høyre.getKeyFrames().add(kf4); 
+        høyre.play();
+        break;
+        case SPACE:
+        
+        ned.stop();
+         System.out.println(player.getLayoutX() + "," + player.getLayoutY());
         break;
     }
+ 
+
+    
 });
+       
+  
+
+
+       
         
        
     }
