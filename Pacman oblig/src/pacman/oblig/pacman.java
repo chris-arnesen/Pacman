@@ -22,12 +22,13 @@ public class pacman extends Circle {
     
         //Pacman figur
     public pacman() {
-        int dx = STR/2;
-        int dy = STR/2;
+        int x = 280;
+        int y = 470;
         int radius = STR/2;
         this.setRadius(radius);
-        this.setCenterX(dx);
-        this.setCenterY(dy);
+        this.setCenterX(x);
+        this.setCenterY(y);
         this.setFill(Color.YELLOW);
+       
     }
 }
