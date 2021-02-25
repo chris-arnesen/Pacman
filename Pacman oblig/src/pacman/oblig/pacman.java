@@ -72,7 +72,7 @@ public class pacman extends Arc {
     KeyValue bue = new KeyValue(
       this.lengthProperty(), 360);
     KeyFrame kf = new KeyFrame(
-      Duration.millis(500), vinkel, bue);
+      Duration.millis(200), vinkel, bue);
     gaping.getKeyFrames().add(kf);
     
     

@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javafx.geometry.BoundingBox;
 import javafx.scene.layout.Pane;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.YELLOW;
@@ -32,6 +33,7 @@ public class centerPane extends Pane {
         getMap();
         
     }
+    BoundingBox bb;
     
     //Metode som leser inn kartet(banen)
     public Scanner getMap() {
@@ -54,6 +56,7 @@ public class centerPane extends Pane {
                                 s.setFill(BLUE);
                                 sperringer.add(s); // Legger til firkant i arraylisten "sperringer"
                                 this.getChildren().add(s); // Legger til firkanten på centerPanet
+                                
                                 pointerX+=STR;
                                 break;
                             }
@@ -98,5 +101,7 @@ public class centerPane extends Pane {
     public static ArrayList<Rectangle> getSperringer() {return sperringer;} 
     public static ArrayList<Circle> getDotter() {return dotter;}
     public static pacman getPlayer() {return player;}
+    
+    
     
 }

@@ -96,12 +96,14 @@ public class Main extends Application {
         KeyFrame kf1 = new KeyFrame(Duration.millis(1000), kv1);
         opp.getKeyFrames().add(kf1); 
         opp.play();
+        player.setRotate(270);
         break;
     case LEFT:
         KeyValue kv2 = new KeyValue(player.translateXProperty(),-width/2+STR+STR/2);
         KeyFrame kf2 = new KeyFrame(Duration.millis(1000), kv2);
         venstre.getKeyFrames().add(kf2); 
         venstre.play();
+        player.setRotate(180);
         
         break;
     case DOWN:
@@ -109,18 +111,21 @@ public class Main extends Application {
         KeyFrame kf3 = new KeyFrame(Duration.millis(1000), kv3);
         ned.getKeyFrames().add(kf3); 
         ned.play();
+        player.setRotate(90);
         break;
     case RIGHT:
         KeyValue kv4 = new KeyValue(player.translateXProperty(),width/2-STR-STR/2);
         KeyFrame kf4 = new KeyFrame(Duration.millis(1000), kv4);
         høyre.getKeyFrames().add(kf4); 
         høyre.play();
+        player.setRotate(0);
         break;
    case SPACE:
         ned.stop();
-         System.out.println(player.getLayoutX() + "," + player.getLayoutY());
+         System.out.println(player.getTranslateX() + "," + player.getTranslateY());
         break;
     }
+    
  
 
     
