@@ -6,6 +6,7 @@
 package pacman.oblig;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -45,7 +46,7 @@ public class Main extends Application {
     static int width  = STR*28;
     static int height = (STR*31)+100;
     
-    
+    static ArrayList<Rectangle> sperringer = centerPane.getSperringer();
     
     //Diverse bokser
     BorderPane bPane;
@@ -144,6 +145,15 @@ public class Main extends Application {
        
         
        
+    }
+    
+    // Skriv metoder her
+    public boolean isCollision(pacman player) {
+        for (Rectangle r : sperringer) {
+            if (player.intersects(r.getBoundsInParent()))
+                return true;
+        }
+    return false;
     }
     
     //Get-metoder for forskjellige størrelser
