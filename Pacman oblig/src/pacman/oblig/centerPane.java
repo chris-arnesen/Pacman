@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javafx.geometry.BoundingBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.YELLOW;
 import javafx.scene.shape.Circle;
@@ -26,6 +27,7 @@ public class centerPane extends Pane {
     static ArrayList<Rectangle> sperringer = new ArrayList<>(); //Skal inneholde alle firkanter/"sperringer" 
     static ArrayList<Circle> dotter = new ArrayList<>(); //Skal inneholde alle prikkene på kartet
     static pacman player; 
+    static Rectangle boundRectangle;
     
     public centerPane() {
         this.setPrefHeight(Main.getSTR()*31);
@@ -78,6 +80,9 @@ public class centerPane extends Pane {
                         case 'p':
                             //Her kommer pacman
                             player = new pacman(0,0); //pointerX+STR, pointerY+(STR/2)
+                              boundRectangle = new Rectangle();
+                              boundRectangle.setFill(Color.GREEN);
+                              this.getChildren().add(boundRectangle);
                             pointerX+=STR;
                             break;
                         default:
@@ -101,7 +106,7 @@ public class centerPane extends Pane {
     public static ArrayList<Rectangle> getSperringer() {return sperringer;} 
     public static ArrayList<Circle> getDotter() {return dotter;}
     public static pacman getPlayer() {return player;}
-    
+    public static Rectangle getBoundRectangle() {return boundRectangle;}
     
     
 }

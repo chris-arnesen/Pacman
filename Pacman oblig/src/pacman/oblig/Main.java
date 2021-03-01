@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.ParallelTransition;
@@ -47,6 +48,7 @@ public class Main extends Application {
     static int height = (STR*31)+100;
     
     static ArrayList<Rectangle> sperringer = centerPane.getSperringer();
+    static Rectangle boundRectangle = centerPane.getBoundRectangle();
     
     //Diverse bokser
     BorderPane bPane;
@@ -70,9 +72,6 @@ public class Main extends Application {
         
         
         
-       
-        
-        
         Scene scene = new Scene(bPane, width, height);
         
         primaryStage.setTitle("Pacman");
@@ -80,55 +79,98 @@ public class Main extends Application {
         primaryStage.show();
         
      
-     
+     //Her kommer animasjon
        Timeline opp = new Timeline();
        Timeline venstre = new Timeline();
        Timeline ned = new Timeline();
        Timeline høyre = new Timeline();
        
+       final int speed = 30;
+       
+       // KeyFrames // KeyFrames // KeyFrames // KeyFrames //
+       KeyFrame oppkf = new KeyFrame(Duration.millis(speed),
+       (evt) -> {
+           player.setCenterY(player.getCenterY()-5);
+           if (isCollision(player)) {
+               opp.pause();
+               player.setCenterY(player.getCenterY()+5);
+           }
+       });
+       opp.getKeyFrames().add(oppkf);
+       opp.setCycleCount(Animation.INDEFINITE);
+       
+       KeyFrame venstrekf = new KeyFrame(Duration.millis(speed),
+       (evt) -> {
+           player.setCenterX(player.getCenterX()-5);
+            if (isCollision(player)) {
+                venstre.pause();
+                player.setCenterX(player.getCenterX()+5);
+            }
+       });
+       venstre.getKeyFrames().add(venstrekf);
+       venstre.setCycleCount(Animation.INDEFINITE);
+       
+       KeyFrame nedkf = new KeyFrame(Duration.millis(speed),
+       (evt) -> {
+           player.setCenterY(player.getCenterY()+5);
+            if (isCollision(player)) {
+                ned.pause();
+                player.setCenterY(player.getCenterY()-5);
+            }
+       });
+       ned.getKeyFrames().add(nedkf);
+       ned.setCycleCount(Animation.INDEFINITE);
+       
+       KeyFrame høyrekf = new KeyFrame(Duration.millis(speed),
+       (evt) -> {
+           player.setCenterX(player.getCenterX()+5);
+               if (isCollision(player)) {
+                   høyre.pause();
+                   player.setCenterX(player.getCenterX()-5);
+               }
+       });
+       høyre.getKeyFrames().add(høyrekf);
+       høyre.setCycleCount(Animation.INDEFINITE);
+       
        player.setTranslateX(280);
        player.setTranslateY(470);
+       //boundRectangle.setX(player.getTranslateX());
+       //boundRectangle.setY(player.getTranslateY());
       
        
    scene.setOnKeyPressed(e -> {        
     switch (e.getCode()) {
         
     case UP:
-        KeyValue kv1 = new KeyValue(player.translateYProperty(),STR+STR/2);
-        KeyFrame kf1 = new KeyFrame(Duration.millis(1000), kv1);
-        opp.getKeyFrames().add(kf1); 
-        System.out.println(player.getTranslateX() + "," + player.getTranslateY());
         opp.play();
+        venstre.stop();
+        ned.stop();
+        høyre.stop();
         player.setRotate(270);
         break;
     case LEFT:
-        KeyValue kv2 = new KeyValue(player.translateXProperty(),STR+STR/2);
-        KeyFrame kf2 = new KeyFrame(Duration.millis(1000), kv2);
-        venstre.getKeyFrames().add(kf2); 
-        System.out.println(player.getTranslateX() + "," + player.getTranslateY());
         venstre.play();
+        opp.stop();
+        ned.stop();
+        høyre.stop();
         player.setRotate(180);
-        
         break;
     case DOWN:
-        KeyValue kv3 = new KeyValue(player.translateYProperty(),height-STR*7+STR/2);
-        KeyFrame kf3 = new KeyFrame(Duration.millis(1000), kv3);
-        ned.getKeyFrames().add(kf3); 
-        System.out.println(player.getTranslateX() + "," + player.getTranslateY());
         ned.play();
+        opp.stop();
+        venstre.stop();
+        høyre.stop();
         player.setRotate(90);
         break;
     case RIGHT:
-        KeyValue kv4 = new KeyValue(player.translateXProperty(),width-STR-STR/2);
-        KeyFrame kf4 = new KeyFrame(Duration.millis(1000), kv4);
-        høyre.getKeyFrames().add(kf4);
-        System.out.println(player.getTranslateX() + "," + player.getTranslateY());
         høyre.play();
+        opp.stop();
+        venstre.stop();
+        ned.stop();
         player.setRotate(0);
         break;
    case SPACE:
         ned.stop();
-         System.out.println(player.getTranslateX() + "," + player.getTranslateY());
         break;
     }
     
@@ -136,7 +178,11 @@ public class Main extends Application {
 
     
 });
-       
+   opp.stop();
+   ned.stop();
+   venstre.stop();
+   høyre.stop();
+     
    
    
   
@@ -148,10 +194,16 @@ public class Main extends Application {
     }
     
     // Skriv metoder her
+    // Legg til boundingBox/eller vanlig box, la den gå "før" pacman, dersom DEN boksen treffer, sett koordinatene dens lik
+    // pacman sine, og isCollision == true
     public boolean isCollision(pacman player) {
         for (Rectangle r : sperringer) {
-            if (player.intersects(r.getBoundsInParent()))
+            if (player.getBoundsInParent().intersects(r.getBoundsInParent())) {
+                r.setFill(Color.RED);
+                System.out.println(player.getBoundsInParent().getWidth());
+                System.out.println("GI FAEN DA");
                 return true;
+            }
         }
     return false;
     }
