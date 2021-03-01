@@ -34,7 +34,11 @@ public class pacman extends Arc {
     //int height = (STR*31)+100;
     double x, y;
     //double x = 280, y = 470;
+<<<<<<< HEAD
     double radius = 8;  //Main.getSTR()/2
+=======
+    double radius = Main.getSTR()/2.5;
+>>>>>>> a03811963b3faeafc002611019d10f93ee97b791
         //Pacman figur
     /*public pacman() {
         double x = 280;
