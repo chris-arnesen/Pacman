@@ -51,7 +51,6 @@ public class Main extends Application {
     
     static ArrayList<Rectangle> sperringer = centerPane.getSperringer();
     static ArrayList<Circle> dotter = centerPane.getDotter();
-    static Rectangle boundRectangle = centerPane.getBoundRectangle();
     
     //Diverse bokser
     BorderPane bPane;
@@ -154,8 +153,6 @@ public class Main extends Application {
        
        player.setTranslateX(280);
        player.setTranslateY(470);
-       //boundRectangle.setX(player.getTranslateX());
-       //boundRectangle.setY(player.getTranslateY());
       
        
    scene.setOnKeyPressed(e -> {        
