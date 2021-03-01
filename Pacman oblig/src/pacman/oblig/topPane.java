@@ -16,24 +16,14 @@ import javafx.scene.text.Text;
  */
 public class topPane extends Pane {
     
-      int ScoreTall = 0;
-    
     public topPane() {
         this.setPrefHeight(50);
         this.setStyle("-fx-border-color: black; -fx-background-color: darkblue;");
         this.getChildren().addAll(getScore(), getLevel());
     }
     
-    public int getScoreTall() {
-        return ScoreTall;
-    }
-    
-    public void setScoreTall(int ScoreTall) {
-        this.ScoreTall = ScoreTall;
-    }
-    
     public Text getScore() {
-            Text text = new Text("Score: " + ScoreTall);
+            Text text = new Text("Score: ");
         text.setFont(Font.font("Arial", 20));
                text.setLayoutX(10);
                text.setLayoutY(30);
