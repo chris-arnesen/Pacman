@@ -40,7 +40,7 @@ public class topPane extends Pane {
     public Text getLevel() {
             Text text = new Text("Level: ");
         text.setFont(Font.font("Arial", 20));
-               text.setLayoutX(410);
+               text.setLayoutX(480);
                text.setLayoutY(30);
                text.setFill(Color.WHITE);
         return text;
