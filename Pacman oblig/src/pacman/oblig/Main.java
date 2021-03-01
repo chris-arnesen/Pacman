@@ -208,6 +208,8 @@ public class Main extends Application {
     return false;
     }
     
+    
+    
     //Get-metoder for forskjellige størrelser
     public static double getWidth()  {return width;}
     public static double getSTR()    {return STR;}
