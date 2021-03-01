@@ -72,6 +72,15 @@ public class Main extends Application {
         pacman player = centerPane.getPlayer();
         center.getChildren().add(player);
         
+        pacman liv1 = new pacman(30, 25);
+        bottom.getChildren().add(liv1);
+        
+        pacman liv2 = new pacman(60, 25);
+        bottom.getChildren().add(liv2);
+        
+        pacman liv3 = new pacman(90, 25);
+        bottom.getChildren().add(liv3);
+        
         
         
         Scene scene = new Scene(bPane, width, height);
