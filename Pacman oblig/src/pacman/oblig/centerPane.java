@@ -80,7 +80,8 @@ public class centerPane extends Pane {
                         case 'p':
                             //Her kommer pacman
                             player = new pacman(0,0); //pointerX+STR, pointerY+(STR/2)
-                              boundRectangle = new Rectangle();
+                              boundRectangle = new Rectangle(0,0,player.getBoundsInParent().getWidth(),
+                                                                 player.getBoundsInParent().getHeight());
                               boundRectangle.setFill(Color.GREEN);
                               this.getChildren().add(boundRectangle);
                             pointerX+=STR;

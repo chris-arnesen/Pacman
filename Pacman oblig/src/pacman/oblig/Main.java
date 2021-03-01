@@ -47,15 +47,17 @@ public class Main extends Application {
     static int width  = STR*28;
     static int height = (STR*31)+100;
     
+    int poeng = 0;
+    
     static ArrayList<Rectangle> sperringer = centerPane.getSperringer();
+    static ArrayList<Circle> dotter = centerPane.getDotter();
     static Rectangle boundRectangle = centerPane.getBoundRectangle();
     
     //Diverse bokser
     BorderPane bPane;
-    topPane top = new topPane();
+    topPane top = new topPane(poeng);
     bottomPane bottom = new bottomPane();
     centerPane center = new centerPane();
-    
     
     @Override
     public void start(Stage primaryStage) {
@@ -95,6 +97,11 @@ public class Main extends Application {
                opp.pause();
                player.setCenterY(player.getCenterY()+5);
            }
+           if (dø(player)) {
+               poeng++;
+               top.setScore(poeng);
+               }
+           
        });
        opp.getKeyFrames().add(oppkf);
        opp.setCycleCount(Animation.INDEFINITE);
@@ -106,6 +113,10 @@ public class Main extends Application {
                 venstre.pause();
                 player.setCenterX(player.getCenterX()+5);
             }
+            if (dø(player)) {
+               poeng++;
+               top.setScore(poeng);
+               }
        });
        venstre.getKeyFrames().add(venstrekf);
        venstre.setCycleCount(Animation.INDEFINITE);
@@ -117,6 +128,10 @@ public class Main extends Application {
                 ned.pause();
                 player.setCenterY(player.getCenterY()-5);
             }
+            if (dø(player)) {
+               poeng++;
+               top.setScore(poeng);
+               }
        });
        ned.getKeyFrames().add(nedkf);
        ned.setCycleCount(Animation.INDEFINITE);
@@ -128,6 +143,11 @@ public class Main extends Application {
                    høyre.pause();
                    player.setCenterX(player.getCenterX()-5);
                }
+               if (dø(player)) {
+               poeng++;
+               top.setScore(poeng);
+               }
+               
        });
        høyre.getKeyFrames().add(høyrekf);
        høyre.setCycleCount(Animation.INDEFINITE);
@@ -174,9 +194,6 @@ public class Main extends Application {
         break;
     }
     
- 
-
-    
 });
    opp.stop();
    ned.stop();
@@ -187,7 +204,7 @@ public class Main extends Application {
    
   
 
-
+    
        
         
        
@@ -200,13 +217,39 @@ public class Main extends Application {
         for (Rectangle r : sperringer) {
             if (player.getBoundsInParent().intersects(r.getBoundsInParent())) {
                 r.setFill(Color.RED);
-                System.out.println(player.getBoundsInParent().getWidth());
-                System.out.println("GI FAEN DA");
                 return true;
             }
         }
     return false;
     }
+    
+    /*
+    public void pickUpPoint(pacman player) {
+        for (Circle c : dotter) {
+            if ( player.getBoundsInParent().intersects(c.getBoundsInParent()) &&
+                                                   c.getFill() != Color.BLACK) {
+                c.setFill(Color.BLACK);
+                //Oppdater score
+                poeng++;
+                System.out.println(poeng);
+                top.oppdaterPoeng(poeng);
+            }
+        }
+    }*/
+    
+    public boolean dø(pacman player) {
+        for (Circle c : dotter) {
+            if ( player.getBoundsInParent().intersects(c.getBoundsInParent()) ) {
+                center.getChildren().remove(c);
+                dotter.remove(c);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
+    
     
     //Get-metoder for forskjellige størrelser
     public static double getWidth()  {return width;}
@@ -226,5 +269,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
     
 }
