@@ -10,7 +10,7 @@ x------xx----xx----xx------x
 xxxxxx-xxxxx-xx-xxxxx-xxxxxx
      x-xxxxx-xx-xxxxx-x
      x-xx    1     xx-x
-     x-xx xxxxxxxx xx-x
+     x-xx xxx  xxx xx-x
 xxxxxx-xx x      x xx-xxxxxx
       -   x2 3 4 x   -
 xxxxxx-xx x      x xx-xxxxxx
