@@ -90,11 +90,11 @@ public class Main extends Application {
         ImageView view2 = Pinky.getPinky();
         ImageView view3 = Blinky.getBlinky();
         
-        String path = "src/Bilder/red.gif";
-        FileInputStream stream = new FileInputStream(path);
-        Image image = new Image(stream);
+        //String path = "src/Bilder/red.gif";
+        //FileInputStream stream = new FileInputStream(path);
+        //Image image = new Image(stream);
         
-        Ghost spooky = new Ghost(100,100, image);
+        Ghost spooky = new Ghost(100,100);
         
         center.getChildren().add(view);
         center.getChildren().add(view1);

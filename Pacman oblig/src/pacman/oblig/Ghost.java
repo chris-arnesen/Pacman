@@ -26,12 +26,13 @@ public class Ghost extends ImageView {
     Image image;
     ImageView view;*/
     
-    /*String path = "src/Bilder/red.gif";
-    FileInputStream stream;
-    Image image = new Image(stream);
-    ImageView view = new ImageView(image);*/
+    String path = "src/Bilder/red.gif";
     
-    public Ghost(double x, double y, Image image) throws FileNotFoundException {
+    
+    public Ghost(double x, double y) throws FileNotFoundException {
+        FileInputStream stream = new FileInputStream(path);
+        Image image = new Image(stream);
+        
         setTranslateX(270);
         setTranslateY(400);
         setFitHeight(20);
