@@ -5,10 +5,6 @@
  */
 package pacman.oblig;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  * Path: "src/Bilder/YMXv.gif"

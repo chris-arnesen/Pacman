@@ -5,10 +5,7 @@
  */
 package pacman.oblig;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 
 /**
  * path: "src/Bilder/ghost2-kopi.gif"
