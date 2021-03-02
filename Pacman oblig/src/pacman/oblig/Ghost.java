@@ -18,37 +18,25 @@ public class Ghost extends ImageView {
     
     double x;
     double y;
-    String path;
+    double height = 20;
+    double width = 20;
+    
+    /*String path;
     FileInputStream stream;
     Image image;
-    ImageView view;
+    ImageView view;*/
     
-    //String path = "src/Bilder/ghost2.gif";
-    //FileInputStream stream = new FileInputStream(path);
-    //Image image = new Image(stream);
-    //ImageView view = new ImageView(image);
+    /*String path = "src/Bilder/red.gif";
+    FileInputStream stream;
+    Image image = new Image(stream);
+    ImageView view = new ImageView(image);*/
     
-    public Ghost(double x, double y, String path) throws FileNotFoundException {
-        Ghost.this.path = path;
-        Ghost.this.stream = new FileInputStream(path);
-        Ghost.this.image = new Image(stream);
-        Ghost.this.view = new ImageView(image);
-        
-        this.setTranslateX(x);
-        this.setTranslateY(y);
-        this.setFitHeight(20);
-        this.setFitWidth(20);
-        
-    } 
-    /* 
-    public String getPath(String path) {
-        return path;
+    public Ghost(double x, double y, Image image) throws FileNotFoundException {
+        setTranslateX(270);
+        setTranslateY(400);
+        setFitHeight(20);
+        setFitWidth(20);
+        setImage(image);
     }
     
-    public FileInputStream getStream(String path) throws FileNotFoundException {
-        return new FileInputStream(path);
-    }
-    */
-
-
 }
