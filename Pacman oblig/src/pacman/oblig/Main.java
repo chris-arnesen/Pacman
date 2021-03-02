@@ -61,6 +61,12 @@ public class Main extends Application {
     bottomPane bottom = new bottomPane();
     centerPane center = new centerPane();
     
+    pacman player;
+    Ghost pinky;
+    Ghost inky;
+    Ghost clyde;
+    Ghost blinky;
+    
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
       
@@ -71,7 +77,7 @@ public class Main extends Application {
         bPane.setCenter(center);
         
         //pacman player = new pacman();
-        pacman player = centerPane.getPlayer();
+        player = centerPane.getPlayer();
         center.getChildren().add(player);
         
         pacman liv1 = new pacman(30, 25);
@@ -88,10 +94,10 @@ public class Main extends Application {
         //FileInputStream stream = new FileInputStream(path);
         //Image image = new Image(stream);
         
-        Ghost pinky = new Pinky(270,400, "src/Bilder/YMXv.gif");
-        Ghost blinky = new Blinky(300,400, "src/Bilder/red.gif");
-        Ghost inky = new Inky(240,400, "src/Bilder/200w.gif");
-        Ghost clyde = new Clyde(270,430, "src/Bilder/ghost2-kopi.gif");
+        pinky = new Pinky(270,400, "src/Bilder/YMXv.gif");
+        blinky = new Blinky(300,400, "src/Bilder/red.gif");
+        inky = new Inky(240,400, "src/Bilder/200w.gif");
+        clyde = new Clyde(270,430, "src/Bilder/ghost2-kopi.gif");
         center.getChildren().addAll(pinky, blinky, inky, clyde);
         
         
@@ -123,6 +129,18 @@ public class Main extends Application {
                poeng++;
                top.setScore(poeng);
                }
+             if (collision(inky)) {
+                   opp.stop();
+               }
+                if (collision(pinky)) {
+                   opp.stop();
+               }
+                 if (collision(blinky)) {
+                   opp.stop();
+               }
+                  if (collision(clyde)) {
+                   opp.stop();
+               }
            
        });
        opp.getKeyFrames().add(oppkf);
@@ -139,6 +157,18 @@ public class Main extends Application {
                poeng++;
                top.setScore(poeng);
                }
+              if (collision(inky)) {
+                   venstre.stop();
+               }
+                if (collision(pinky)) {
+                   venstre.stop();
+               }
+                 if (collision(blinky)) {
+                   venstre.stop();
+               }
+                  if (collision(clyde)) {
+                   venstre.stop();
+               }
        });
        venstre.getKeyFrames().add(venstrekf);
        venstre.setCycleCount(Animation.INDEFINITE);
@@ -154,6 +184,18 @@ public class Main extends Application {
                poeng++;
                top.setScore(poeng);
                }
+              if (collision(inky)) {
+                   ned.stop();
+               }
+                if (collision(pinky)) {
+                   ned.stop();
+               }
+                 if (collision(blinky)) {
+                   ned.stop();
+               }
+                  if (collision(clyde)) {
+                   ned.stop();
+               }
        });
        ned.getKeyFrames().add(nedkf);
        ned.setCycleCount(Animation.INDEFINITE);
@@ -168,6 +210,18 @@ public class Main extends Application {
                if (dø(player)) {
                poeng++;
                top.setScore(poeng);
+               }
+               if (collision(inky)) {
+                   høyre.stop();
+               }
+                if (collision(pinky)) {
+                   høyre.stop();
+               }
+                 if (collision(blinky)) {
+                   høyre.stop();
+               }
+                  if (collision(clyde)) {
+                   høyre.stop();
                }
                
        });
@@ -239,6 +293,16 @@ public class Main extends Application {
                 return true;
             }
         }
+    return false;
+    }
+    
+    public boolean collision(Ghost ghost) {
+        
+            if (player.getBoundsInParent().intersects(ghost.getBoundsInParent())) {
+                
+                return true;
+            }
+        
     return false;
     }
     

@@ -12,8 +12,8 @@ package pacman.oblig;
  */
 public class Blinky extends Ghost {
     
-    double height;
-    double width;
+    double height = 10;
+    double width = 10;
      
     public Blinky(double x, double y, String path) {
         super(x,y,path);
