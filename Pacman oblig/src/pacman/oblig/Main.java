@@ -5,6 +5,7 @@
  */
 package pacman.oblig;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -21,6 +22,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -59,7 +62,7 @@ public class Main extends Application {
     centerPane center = new centerPane();
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws FileNotFoundException {
       
         //Borderpane
         BorderPane bPane = new BorderPane();
@@ -79,6 +82,21 @@ public class Main extends Application {
         
         pacman liv3 = new pacman(90, 25);
         bottom.getChildren().add(liv3);
+        
+        String path = "src/Bilder/ghost2-kopi.gif";
+        FileInputStream stream = new FileInputStream(path);
+        Image image = new Image(stream);
+        ImageView view = new ImageView(image);
+        view.setTranslateX(10);
+        view.setTranslateY(100);
+        view.setFitHeight(20);
+        view.setFitWidth(20);
+        
+        
+       //Ghost clyde = new Ghost();
+        
+        center.getChildren().add(view);
+        
         
         
         

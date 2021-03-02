@@ -77,8 +77,8 @@ public class pacman extends Arc {
     gaping.getKeyFrames().add(kf);
     
     
-    // Sekvensiell utførelse bevegelser og rotasjoner    
-     ParallelTransition animasjon=new ParallelTransition();
+     
+    ParallelTransition animasjon=new ParallelTransition();
     animasjon.getChildren().add(gaping);
     animasjon.play();
     
