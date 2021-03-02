@@ -129,16 +129,7 @@ public class Main extends Application {
                poeng++;
                top.setScore(poeng);
                }
-             if (collision(inky)) {
-                   opp.stop();
-               }
-                if (collision(pinky)) {
-                   opp.stop();
-               }
-                 if (collision(blinky)) {
-                   opp.stop();
-               }
-                  if (collision(clyde)) {
+             if (hitByGhost(player)) {
                    opp.stop();
                }
            
@@ -157,16 +148,7 @@ public class Main extends Application {
                poeng++;
                top.setScore(poeng);
                }
-              if (collision(inky)) {
-                   venstre.stop();
-               }
-                if (collision(pinky)) {
-                   venstre.stop();
-               }
-                 if (collision(blinky)) {
-                   venstre.stop();
-               }
-                  if (collision(clyde)) {
+              if (hitByGhost(player)) {
                    venstre.stop();
                }
        });
@@ -184,16 +166,7 @@ public class Main extends Application {
                poeng++;
                top.setScore(poeng);
                }
-              if (collision(inky)) {
-                   ned.stop();
-               }
-                if (collision(pinky)) {
-                   ned.stop();
-               }
-                 if (collision(blinky)) {
-                   ned.stop();
-               }
-                  if (collision(clyde)) {
+              if (hitByGhost(player)) {
                    ned.stop();
                }
        });
@@ -211,16 +184,7 @@ public class Main extends Application {
                poeng++;
                top.setScore(poeng);
                }
-               if (collision(inky)) {
-                   høyre.stop();
-               }
-                if (collision(pinky)) {
-                   høyre.stop();
-               }
-                 if (collision(blinky)) {
-                   høyre.stop();
-               }
-                  if (collision(clyde)) {
+               if (hitByGhost(player)) {
                    høyre.stop();
                }
                
@@ -293,6 +257,15 @@ public class Main extends Application {
                 return true;
             }
         }
+    return false;
+    }
+    
+    public boolean hitByGhost(pacman player) {
+        if (player.getBoundsInParent().intersects(clyde.getBoundsInParent()) ||
+            player.getBoundsInParent().intersects(blinky.getBoundsInParent()) ||
+            player.getBoundsInParent().intersects(inky.getBoundsInParent()) ||
+            player.getBoundsInParent().intersects(pinky.getBoundsInParent()))
+        return true;
     return false;
     }
     
