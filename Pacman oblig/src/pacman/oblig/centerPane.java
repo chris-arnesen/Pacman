@@ -27,6 +27,10 @@ public class centerPane extends Pane {
     static ArrayList<Rectangle> sperringer = new ArrayList<>(); //Skal inneholde alle firkanter/"sperringer" 
     static ArrayList<Circle> dotter = new ArrayList<>(); //Skal inneholde alle prikkene på kartet
     static pacman player; 
+    static Blinky blinky;
+    static Pinky pinky;
+    static Inky inky;
+    static Clyde clyde;
     static Rectangle boundRectangle;
     
     public centerPane() {
@@ -80,10 +84,22 @@ public class centerPane extends Pane {
                         case 'p':
                             //Her kommer pacman
                             player = new pacman(0,0); //pointerX+STR, pointerY+(STR/2)
-                              boundRectangle = new Rectangle(0,0,player.getBoundsInParent().getWidth(),
-                                                                 player.getBoundsInParent().getHeight());
-                              boundRectangle.setFill(Color.GREEN);
-                              this.getChildren().add(boundRectangle);
+                            pointerX+=STR;
+                            break;
+                        case '1':
+                            clyde = new Clyde(pointerX+(STR/2), pointerY, "src/Bilder/ghost2-kopi.gif");
+                            pointerX+=STR;
+                            break;
+                        case '2':
+                            inky = new Inky(pointerX+(STR/2), pointerY, "src/Bilder/200w.gif");
+                            pointerX+=STR;
+                            break;
+                        case '3':
+                            pinky = new Pinky(pointerX+(STR/2),pointerY, "src/Bilder/YMXv.gif");
+                            pointerX+=STR;
+                            break;
+                        case '4':
+                            blinky = new Blinky(pointerX+(STR/2), pointerY, "src/Bilder/red.gif");
                             pointerX+=STR;
                             break;
                         default:
@@ -107,7 +123,11 @@ public class centerPane extends Pane {
     public static ArrayList<Rectangle> getSperringer() {return sperringer;} 
     public static ArrayList<Circle> getDotter() {return dotter;}
     public static pacman getPlayer() {return player;}
-    public static Rectangle getBoundRectangle() {return boundRectangle;}
+    public static Blinky getBlinky() {return blinky;}
+    public static Pinky getPinky() {return pinky;}
+    public static Inky getInky() {return inky;}
+    public static Clyde getClyde() {return clyde;}
+    
     
     
 }

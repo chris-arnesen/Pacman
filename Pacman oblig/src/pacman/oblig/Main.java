@@ -94,10 +94,10 @@ public class Main extends Application {
         //FileInputStream stream = new FileInputStream(path);
         //Image image = new Image(stream);
         
-        pinky = new Pinky(270,400, "src/Bilder/YMXv.gif");
-        blinky = new Blinky(300,400, "src/Bilder/red.gif");
-        inky = new Inky(240,400, "src/Bilder/200w.gif");
-        clyde = new Clyde(270,430, "src/Bilder/ghost2-kopi.gif");
+        pinky = center.getPinky();
+        blinky = center.getBlinky();
+        inky = center.getInky();
+        clyde = center.getClyde();
         center.getChildren().addAll(pinky, blinky, inky, clyde);
         
         
