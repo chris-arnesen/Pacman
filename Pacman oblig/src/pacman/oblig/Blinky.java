@@ -14,20 +14,17 @@ import javafx.scene.image.ImageView;
  *
  * @author christofferstrandarnesen
  */
-public class Clyde {
-    
-   public static ImageView getClyde() throws FileNotFoundException {
-        String path = "src/Bilder/ghost2-kopi.gif";
+public class Blinky {
+     public static ImageView getBlinky() throws FileNotFoundException {
+        String path = "src/Bilder/red.gif";
         
         FileInputStream stream = new FileInputStream(path);
         Image image = new Image(stream);
         ImageView view = new ImageView(image);
-        view.setTranslateX(10);
-        view.setTranslateY(100);
+        view.setTranslateX(140);
+        view.setTranslateY(170);
         view.setFitHeight(20);
         view.setFitWidth(20);
         return view;
     }
-   
-   
 }

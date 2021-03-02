@@ -83,19 +83,17 @@ public class Main extends Application {
         pacman liv3 = new pacman(90, 25);
         bottom.getChildren().add(liv3);
         
-        String path = "src/Bilder/ghost2-kopi.gif";
-        FileInputStream stream = new FileInputStream(path);
-        Image image = new Image(stream);
-        ImageView view = new ImageView(image);
-        view.setTranslateX(10);
-        view.setTranslateY(100);
-        view.setFitHeight(20);
-        view.setFitWidth(20);
+     
         
-        
-       //Ghost clyde = new Ghost();
+        ImageView view = Clyde.getClyde();
+        ImageView view1 = Inky.getInky();
+        ImageView view2 = Pinky.getPinky();
+        ImageView view3 = Blinky.getBlinky();
         
         center.getChildren().add(view);
+        center.getChildren().add(view1);
+        center.getChildren().add(view2);
+        center.getChildren().add(view3);
         
         
         
@@ -227,7 +225,6 @@ public class Main extends Application {
    
    
   
-
     
        
         
