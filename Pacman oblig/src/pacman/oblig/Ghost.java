@@ -14,7 +14,7 @@ import javafx.scene.image.ImageView;
  *
  * @author christofferstrandarnesen
  */
-public class Ghost extends ImageView {
+public abstract class Ghost extends ImageView {
     
     double x;
     double y;
@@ -26,18 +26,25 @@ public class Ghost extends ImageView {
     Image image;
     ImageView view;*/
     
-    String path = "src/Bilder/red.gif";
+    String path;//"src/Bilder/red.gif";
     
     
-    public Ghost(double x, double y) throws FileNotFoundException {
-        FileInputStream stream = new FileInputStream(path);
-        Image image = new Image(stream);
+    public Ghost(double x, double y, String path) {
+        this.x = x;
+        this.y = y;
+        this.path = path;
+        try {
+            FileInputStream stream = new FileInputStream(getPath()); //path
+            Image image = new Image(stream);
         
-        setTranslateX(270);
-        setTranslateY(400);
-        setFitHeight(20);
-        setFitWidth(20);
-        setImage(image);
+            setTranslateX(x);
+            setTranslateY(y);
+            setFitHeight(height);
+            setFitWidth(width);
+            setImage(image);
+        } catch (FileNotFoundException e) {System.out.println("funker ikke");}
     }
     
+    public void setPath(String path) {this.path = path;}
+    public String getPath() {return path;}
 }

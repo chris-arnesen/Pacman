@@ -11,20 +11,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- *
+ * Path: "src/Bilder/red.gif"
  * @author christofferstrandarnesen
  */
-public class Blinky {
-     public static ImageView getBlinky() throws FileNotFoundException {
-        String path = "src/Bilder/red.gif";
-        
-        FileInputStream stream = new FileInputStream(path);
-        Image image = new Image(stream);
-        ImageView view = new ImageView(image);
-        view.setTranslateX(140);
-        view.setTranslateY(170);
-        view.setFitHeight(20);
-        view.setFitWidth(20);
-        return view;
+public class Blinky extends Ghost {
+    
+    double height;
+    double width;
+     
+    public Blinky(double x, double y, String path) {
+        super(x,y,path);
     }
+    
 }

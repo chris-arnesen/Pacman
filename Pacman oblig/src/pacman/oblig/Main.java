@@ -83,24 +83,16 @@ public class Main extends Application {
         pacman liv3 = new pacman(90, 25);
         bottom.getChildren().add(liv3);
         
-     
-        
-        ImageView view = Clyde.getClyde();
-        ImageView view1 = Inky.getInky();
-        ImageView view2 = Pinky.getPinky();
-        ImageView view3 = Blinky.getBlinky();
         
         //String path = "src/Bilder/red.gif";
         //FileInputStream stream = new FileInputStream(path);
         //Image image = new Image(stream);
         
-        Ghost spooky = new Ghost(100,100);
-        
-        center.getChildren().add(view);
-        center.getChildren().add(view1);
-        center.getChildren().add(view2);
-        center.getChildren().add(view3);
-        center.getChildren().add(spooky);
+        Ghost pinky = new Pinky(270,400, "src/Bilder/YMXv.gif");
+        Ghost blinky = new Blinky(300,400, "src/Bilder/red.gif");
+        Ghost inky = new Inky(240,400, "src/Bilder/200w.gif");
+        Ghost clyde = new Clyde(270,430, "src/Bilder/ghost2-kopi.gif");
+        center.getChildren().addAll(pinky, blinky, inky, clyde);
         
         
         

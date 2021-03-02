@@ -11,21 +11,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- *
+ * Path: "src/Bilder/200w.gif"
  * @author christofferstrandarnesen
  */
-public class Inky {
-    public static ImageView getInky() throws FileNotFoundException {
-        String path = "src/Bilder/200w.gif";
-        
-        FileInputStream stream = new FileInputStream(path);
-        Image image = new Image(stream);
-        ImageView view = new ImageView(image);
-        view.setTranslateX(10);
-        view.setTranslateY(150);
-        view.setFitHeight(20);
-        view.setFitWidth(20);
-        return view;
+public class Inky extends Ghost {
+    
+    double height;
+    double width;
+     
+    public Inky(double x, double y, String path) {
+        super(x,y,path);
     }
     
 }

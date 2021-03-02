@@ -11,23 +11,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- *
+ * path: "src/Bilder/ghost2-kopi.gif"
  * @author christofferstrandarnesen
  */
-public class Clyde {
+public class Clyde extends Ghost {
     
-   public static ImageView getClyde() throws FileNotFoundException {
-        String path = "src/Bilder/ghost2-kopi.gif";
-        
-        FileInputStream stream = new FileInputStream(path);
-        Image image = new Image(stream);
-        ImageView view = new ImageView(image);
-        view.setTranslateX(10);
-        view.setTranslateY(100);
-        view.setFitHeight(20);
-        view.setFitWidth(20);
-        return view;
+    String path = "src/Bilder/ghost2-kopi.gif"; //funker ikke atm
+    double height = 100;
+    double width = 100;
+    
+    public Clyde(double x, double y, String path) {
+        super(x,y,path);
     }
-   
-   
+    
 }
