@@ -24,6 +24,8 @@ public abstract class Ghost extends ImageView {
     double height = 20;
     double width = 20;
     
+    AnimationTimer timer;
+    
     /*String path;
     FileInputStream stream;
     Image image;
@@ -55,7 +57,7 @@ public abstract class Ghost extends ImageView {
     protected void chasePacman(pacman player) {
         //pacman.setMovement();
 
-        new AnimationTimer() {
+        timer = new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) {
                 
@@ -87,7 +89,7 @@ public abstract class Ghost extends ImageView {
                     }
                 }
             }
-        }.start();
+        };timer.start();
     }
     
     
