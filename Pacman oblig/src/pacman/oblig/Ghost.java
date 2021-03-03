@@ -52,34 +52,38 @@ public abstract class Ghost extends ImageView {
     public String getPath() {return path;}
     
     
-    protected void chase(pacman player) {
+    protected void chasePacman(pacman player) {
         //pacman.setMovement();
 
         new AnimationTimer() {
+            @Override
             public void handle(long currentNanoTime) {
-                double pacPosX = player.getCenterX();
-                double pacPosY = player.getCenterY();
-
+                
                 double ghostX = getX();
                 double ghostY = getY();
-System.out.println(getX());
-                double distanceX = Math.abs(pacPosX - getX());
-                double distanceY = Math.abs(pacPosY - getY());
+               
+                double pacmanX = player.getCenterX();
+                double pacmanY = player.getCenterY();
+                
+                
+                double dX = Math.abs(pacmanX - getX());
+                double dY = Math.abs(pacmanY - getY());
+
          
-                if (distanceX > distanceY) { 
-                    if (ghostX > pacPosX) {
-                        setX(ghostX - 1);
+                if (dX > dY) { 
+                    if (ghostX < pacmanX) {
+                        setX(ghostX + 1);
                     } 
                     else {
-                        setX(ghostX + 1);
+                        setX(ghostX - 1);
                     }
                 } 
                 else {
-                    if(ghostY > pacPosY) {
-                        setY(ghostY - 1);
+                    if(ghostY < pacmanY) {
+                        setY(ghostY + 1);
                     } 
                     else {
-                        setY(ghostY + 1);
+                        setY(ghostY - 1);
                     }
                 }
             }
