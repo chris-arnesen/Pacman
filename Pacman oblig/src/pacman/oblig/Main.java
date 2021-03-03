@@ -50,7 +50,10 @@ public class Main extends Application {
     static int width  = STR*28;
     static int height = (STR*31)+100;
     
+    int alleLivIndeks = 2;
+    
     int poeng = 0;
+    double random = Math.random();
     
     static ArrayList<Rectangle> sperringer = centerPane.getSperringer();
     static ArrayList<Circle> dotter = centerPane.getDotter();
@@ -76,23 +79,19 @@ public class Main extends Application {
         bPane.setBottom(bottom);
         bPane.setCenter(center);
         
-        //pacman player = new pacman();
+        // Oppretter arraylist over liv, legger til tre stk liv
+        int livX = 30, livY = 25;
+        ArrayList<pacman> alleLiv = new ArrayList<>();
+        for (int i = 0; i <= alleLivIndeks; i++) { 
+            pacman liv = new pacman(livX,livY);
+            alleLiv.add(liv);
+            bottom.getChildren().add(liv);
+            livX+=30;
+        }
+        
         player = centerPane.getPlayer();
         center.getChildren().add(player);
         
-        pacman liv1 = new pacman(30, 25);
-        bottom.getChildren().add(liv1);
-        
-        pacman liv2 = new pacman(60, 25);
-        bottom.getChildren().add(liv2);
-        
-        pacman liv3 = new pacman(90, 25);
-        bottom.getChildren().add(liv3);
-        
-        
-        //String path = "src/Bilder/red.gif";
-        //FileInputStream stream = new FileInputStream(path);
-        //Image image = new Image(stream);
         
         pinky = center.getPinky();
         blinky = center.getBlinky();
@@ -100,15 +99,16 @@ public class Main extends Application {
         clyde = center.getClyde();
         center.getChildren().addAll(pinky, blinky, inky, clyde);
         
-        
+        clyde.chase(player);
         
         Scene scene = new Scene(bPane, width, height);
         
         primaryStage.setTitle("Pacman");
         primaryStage.setScene(scene);
         primaryStage.show();
-        
-     
+    //Her kommer animasjon for spøkelsene
+               
+       
      //Her kommer animasjon
        Timeline opp = new Timeline();
        Timeline venstre = new Timeline();
@@ -130,7 +130,9 @@ public class Main extends Application {
                top.setScore(poeng);
                }
              if (hitByGhost(player)) {
-                   opp.stop();
+                 bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
+                 alleLivIndeks--;
+                 opp.stop();
                }
            
        });
@@ -149,7 +151,9 @@ public class Main extends Application {
                top.setScore(poeng);
                }
               if (hitByGhost(player)) {
-                   venstre.stop();
+                  bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
+                  alleLivIndeks--;
+                  venstre.stop();
                }
        });
        venstre.getKeyFrames().add(venstrekf);
@@ -167,7 +171,9 @@ public class Main extends Application {
                top.setScore(poeng);
                }
               if (hitByGhost(player)) {
-                   ned.stop();
+                  bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
+                  alleLivIndeks--; 
+                  ned.stop();
                }
        });
        ned.getKeyFrames().add(nedkf);
@@ -185,6 +191,8 @@ public class Main extends Application {
                top.setScore(poeng);
                }
                if (hitByGhost(player)) {
+                   bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
+                   alleLivIndeks--;
                    høyre.stop();
                }
                
@@ -192,9 +200,10 @@ public class Main extends Application {
        høyre.getKeyFrames().add(høyrekf);
        høyre.setCycleCount(Animation.INDEFINITE);
        
-       player.setTranslateX(280);
-       player.setTranslateY(470);
-      
+       //player.setTranslateX(280);
+       //player.setTranslateY(470);
+      // Slutt på KeyFrames // Slutt på KeyFrames // Slutt på KeyFrames
+      // Slutt på KeyFrames // Slutt på KeyFrames // Slutt på KeyFrames
        
    scene.setOnKeyPressed(e -> {        
     switch (e.getCode()) {
@@ -243,13 +252,12 @@ public class Main extends Application {
   
     
        
-        
+        System.out.println("Pacman - X: " + player.getCenterX() + " Y: " + player.getCenterY());
+        System.out.println("Clyde - X: " + clyde.getX() + " Y: " + clyde.getY());
        
     }
     
     // Skriv metoder her
-    // Legg til boundingBox/eller vanlig box, la den gå "før" pacman, dersom DEN boksen treffer, sett koordinatene dens lik
-    // pacman sine, og isCollision == true
     public boolean isCollision(pacman player) {
         for (Rectangle r : sperringer) {
             if (player.getBoundsInParent().intersects(r.getBoundsInParent())) {
@@ -269,29 +277,26 @@ public class Main extends Application {
     return false;
     }
     
-    public boolean collision(Ghost ghost) {
-        
-            if (player.getBoundsInParent().intersects(ghost.getBoundsInParent())) {
-                
+    public boolean isCollisionGhost(Ghost ghost) {
+        ArrayList<Rectangle> sperringer = center.getSperringer();
+        for (Rectangle r : sperringer) {
+            if (ghost.getBoundsInParent().intersects(r.getBoundsInParent()))
                 return true;
-            }
-        
+        }
     return false;
     }
     
-    /*
-    public void pickUpPoint(pacman player) {
-        for (Circle c : dotter) {
-            if ( player.getBoundsInParent().intersects(c.getBoundsInParent()) &&
-                                                   c.getFill() != Color.BLACK) {
-                c.setFill(Color.BLACK);
-                //Oppdater score
-                poeng++;
-                System.out.println(poeng);
-                top.oppdaterPoeng(poeng);
-            }
+    public boolean almostCollision(Ghost ghost) {
+        Ghost tempGhost = ghost;
+        tempGhost.setX(ghost.getX()+3);
+        for (Rectangle r : sperringer) {
+            if (tempGhost.getBoundsInParent().intersects(r.getBoundsInParent()) )
+                return true;
         }
-    }*/
+    return false;
+    }
+    
+    
     
     public boolean dø(pacman player) {
         for (Circle c : dotter) {

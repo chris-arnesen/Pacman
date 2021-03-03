@@ -31,7 +31,6 @@ public class centerPane extends Pane {
     static Pinky pinky;
     static Inky inky;
     static Clyde clyde;
-    static Rectangle boundRectangle;
     
     public centerPane() {
         this.setPrefHeight(Main.getSTR()*31);
@@ -83,11 +82,11 @@ public class centerPane extends Pane {
                             }
                         case 'p':
                             //Her kommer pacman
-                            player = new pacman(0,0); //pointerX+STR, pointerY+(STR/2)
+                            player = new pacman(pointerX+(STR/2), pointerY+(STR/2)); //pointerX+STR, pointerY+(STR/2)
                             pointerX+=STR;
                             break;
                         case '1':
-                            clyde = new Clyde(pointerX+(STR/2), pointerY, "src/Bilder/ghost2-kopi.gif");
+                            clyde = new Clyde(pointerX+(STR/2), pointerY, "src/Bilder/ghost2-kopi.gif"); //pointerX+(STR/2), pointerY,
                             pointerX+=STR;
                             break;
                         case '2':
@@ -122,7 +121,9 @@ public class centerPane extends Pane {
     //Get-metode for arraylisten over alle sperringer
     public static ArrayList<Rectangle> getSperringer() {return sperringer;} 
     public static ArrayList<Circle> getDotter() {return dotter;}
+    
     public static pacman getPlayer() {return player;}
+    
     public static Blinky getBlinky() {return blinky;}
     public static Pinky getPinky() {return pinky;}
     public static Inky getInky() {return inky;}

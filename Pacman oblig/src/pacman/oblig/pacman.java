@@ -28,30 +28,11 @@ import javafx.util.Duration;
  */
 
 public class pacman extends Arc {
-    //Disse trengs ikke, bruk heller getSTR(), getHeight(), getWidth()
-    //int STR    = 20;
-    //int width  = STR*28;
-    //int height = (STR*31)+100;
+    
     double x, y;
-    //double x = 280, y = 470;
-    //double radius = 8;  //Main.getSTR()/2
     double radius = Main.getSTR()/2.5;
-        //Pacman figur
-    /*public pacman() {
-        double x = 280;
-        double y = 470;
-        double radius = Main.getSTR()/2;
-        this.setRadius(radius);
-        this.setCenterX(x);
-        this.setCenterY(y);
-        this.setFill(Color.YELLOW);  
-    }*/
     
     public pacman(double x, double y) {
-        //this.setRadius(this.radius);
-        //this.setCenterX(x);
-        //this.setCenterY(y);
-        //this.setFill(Color.YELLOW);
         
         this.setCenterX(x);
         this.setCenterY(y);
