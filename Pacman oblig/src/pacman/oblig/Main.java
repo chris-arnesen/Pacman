@@ -58,7 +58,7 @@ public class Main extends Application {
     
     static ArrayList<Rectangle> sperringer = centerPane.getSperringer();
     static ArrayList<Circle> dotter = centerPane.getDotter();
-    
+    static ArrayList<pacman> alleLiv = new ArrayList<>();
     //Diverse bokser
     BorderPane bPane;
     topPane top = new topPane(poeng);
@@ -72,6 +72,11 @@ public class Main extends Application {
     Ghost inky;
     Ghost clyde;
     Ghost blinky;
+    
+    Timeline opp = new Timeline();
+    Timeline venstre = new Timeline();
+    Timeline ned = new Timeline();
+    Timeline høyre = new Timeline();
     
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
@@ -90,7 +95,7 @@ public class Main extends Application {
         
         // Oppretter arraylist over liv, legger til tre stk liv
         int livX = 30, livY = 25;
-        ArrayList<pacman> alleLiv = new ArrayList<>();
+        
         for (int i = 0; i <= alleLivIndeks; i++) { 
             pacman liv = new pacman(livX,livY);
             alleLiv.add(liv);
@@ -108,8 +113,10 @@ public class Main extends Application {
         clyde = center.getClyde();
         center.getChildren().addAll(pinky, blinky, inky, clyde);
         
+        inky.chase(player, inky);
+        blinky.chase(player, blinky);
         clyde.chase(player, clyde);
-        
+        pinky.chase(player, pinky);
         Scene scene = new Scene(bPane, width, height);
         
         primaryStage.setTitle("Pacman");
@@ -119,11 +126,11 @@ public class Main extends Application {
                
        
      //Her kommer animasjon
-       Timeline opp = new Timeline();
+       /*Timeline opp = new Timeline();
        Timeline venstre = new Timeline();
        Timeline ned = new Timeline();
        Timeline høyre = new Timeline();
-       
+       */
        final int speed = 30;
        
        // KeyFrames // KeyFrames // KeyFrames // KeyFrames //
@@ -138,14 +145,16 @@ public class Main extends Application {
                poeng++;
                top.setScore(poeng);
                }
-             if (hitByGhost(player)) {
+             /*if (hitByGhost(player)) {
                  bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
                  alleLivIndeks--;
                  
                  gameOver();
                  
                  opp.stop();
-               }
+               }*/
+             hitByGhost(player);
+             //gameOver();
            
        });
        opp.getKeyFrames().add(oppkf);
@@ -162,14 +171,16 @@ public class Main extends Application {
                poeng++;
                top.setScore(poeng);
                }
-              if (hitByGhost(player)) {
+              /*if (hitByGhost(player)) {
                   bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
                   alleLivIndeks--;
                   
                    gameOver();
                   
                   venstre.stop();
-               }
+               }*/
+              hitByGhost(player);
+              //gameOver();
        });
        venstre.getKeyFrames().add(venstrekf);
        venstre.setCycleCount(Animation.INDEFINITE);
@@ -185,13 +196,15 @@ public class Main extends Application {
                poeng++;
                top.setScore(poeng);
                }
-              if (hitByGhost(player)) {
+              /*if (hitByGhost(player)) {
                   bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
                   alleLivIndeks--; 
                   
                   gameOver();
                   ned.stop();
-               }
+               }*/
+              hitByGhost(player);
+              //gameOver();
        });
        ned.getKeyFrames().add(nedkf);
        ned.setCycleCount(Animation.INDEFINITE);
@@ -207,20 +220,18 @@ public class Main extends Application {
                poeng++;
                top.setScore(poeng);
                }
-               if (hitByGhost(player)) {
-                   bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
-                   alleLivIndeks--;
+               hitByGhost(player);
                    
-                   gameOver();
-                   høyre.stop();
-               }
+                   
+                   //gameOver();
+                   //høyre.stop();
+               
                
        });
        høyre.getKeyFrames().add(høyrekf);
        høyre.setCycleCount(Animation.INDEFINITE);
        
-       //player.setTranslateX(280);
-       //player.setTranslateY(470);
+       
       // Slutt på KeyFrames // Slutt på KeyFrames // Slutt på KeyFrames
       // Slutt på KeyFrames // Slutt på KeyFrames // Slutt på KeyFrames
        
@@ -289,13 +300,30 @@ public class Main extends Application {
     return false;
     }
     
-    public boolean hitByGhost(pacman player) {
+    public void hitByGhost(pacman player) {
         if (player.getBoundsInParent().intersects(clyde.getBoundsInParent()) ||
             player.getBoundsInParent().intersects(blinky.getBoundsInParent()) ||
             player.getBoundsInParent().intersects(inky.getBoundsInParent()) ||
-            player.getBoundsInParent().intersects(pinky.getBoundsInParent()))
-        return true;
-    return false;
+            player.getBoundsInParent().intersects(pinky.getBoundsInParent())) {
+               bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
+                   alleLivIndeks--;
+                   opp.stop();
+                   høyre.stop();
+                   ned.stop();
+                   venstre.stop();
+                   
+                   player.setCenterX(player.getPacmanX());
+                   player.setCenterY(player.getPacmanY());
+                   pinky.setX(pinky.getGhostX());
+                   pinky.setY(pinky.getGhostY());
+                   inky.setX(inky.getGhostX());
+                   inky.setY(inky.getGhostY());
+                   blinky.setX(blinky.getGhostX());
+                   blinky.setY(blinky.getGhostY());
+                   clyde.setX(clyde.getGhostX());
+                   clyde.setY(clyde.getGhostY());
+                   gameOver();
+        }
     }
     
     public boolean isCollisionGhost(Ghost ghost) {
@@ -354,7 +382,6 @@ public class Main extends Application {
     public static double getWidth()  {return width;}
     public static double getSTR()    {return STR;}
     public static double getHeight() {return height;}
-    
    
        
         

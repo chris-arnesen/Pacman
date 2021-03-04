@@ -34,6 +34,8 @@ public class pacman extends Arc {
     
     public pacman(double x, double y) {
         
+        this.x = x;
+        this.y = y;
         this.setCenterX(x);
         this.setCenterY(y);
         this.setRadiusX(this.radius);

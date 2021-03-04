@@ -32,6 +32,9 @@ public abstract class Ghost extends ImageView {
     
     String path;//"src/Bilder/red.gif";
     
+    public double getGhostX() {return x;}
+    public double getGhostY() {return y;}
+    
     
     public Ghost(double x, double y, String path) {
         this.x = x;
