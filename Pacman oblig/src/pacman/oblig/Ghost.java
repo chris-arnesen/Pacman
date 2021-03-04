@@ -105,17 +105,17 @@ public abstract class Ghost extends ImageView {
                     else {
                         if (!collideDownInc(ghost)) {
                             setY(ghostY + 1);                      //down
-                            System.out.println("ned");
+                            //System.out.println("ned");
                         }
                             else if (!collideRightInc(ghost)) {
                             setX(ghostX + 1);
-                            System.out.println("høyre");
+                            //System.out.println("høyre");
                             }
                         else if (!collideLeftInc(ghost))
                             setX(ghostX - 1);
                         else {
                             setY(ghostY - 1);
-                            System.out.println("opp");
+                            //System.out.println("opp");
                         }                  
                         }
                 }

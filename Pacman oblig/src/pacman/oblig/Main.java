@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -63,6 +64,8 @@ public class Main extends Application {
     topPane top = new topPane(poeng);
     bottomPane bottom = new bottomPane();
     centerPane center = new centerPane();
+    Label GameOver = new Label("Game Over...");
+    
     
     pacman player;
     Ghost pinky;
@@ -72,12 +75,18 @@ public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
+        
+        
+      
       
         //Borderpane
         BorderPane bPane = new BorderPane();
         bPane.setTop(top);
         bPane.setBottom(bottom);
         bPane.setCenter(center);
+        
+      
+      
         
         // Oppretter arraylist over liv, legger til tre stk liv
         int livX = 30, livY = 25;
@@ -132,6 +141,9 @@ public class Main extends Application {
              if (hitByGhost(player)) {
                  bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
                  alleLivIndeks--;
+                 
+                 gameOver();
+                 
                  opp.stop();
                }
            
@@ -153,6 +165,9 @@ public class Main extends Application {
               if (hitByGhost(player)) {
                   bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
                   alleLivIndeks--;
+                  
+                   gameOver();
+                  
                   venstre.stop();
                }
        });
@@ -173,6 +188,8 @@ public class Main extends Application {
               if (hitByGhost(player)) {
                   bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
                   alleLivIndeks--; 
+                  
+                  gameOver();
                   ned.stop();
                }
        });
@@ -193,6 +210,8 @@ public class Main extends Application {
                if (hitByGhost(player)) {
                    bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
                    alleLivIndeks--;
+                   
+                   gameOver();
                    høyre.stop();
                }
                
@@ -246,6 +265,8 @@ public class Main extends Application {
    ned.stop();
    venstre.stop();
    høyre.stop();
+   
+  
      
    
    
@@ -307,6 +328,23 @@ public class Main extends Application {
             }
         }
         return false;
+    }
+    public boolean gameOver() {
+         if(alleLivIndeks == -1) {
+             
+             GameOver.setStyle("-fx-text-fill:YELLOW; -fx-font-size: 40;");
+             GameOver.setPrefSize(500,500);
+             GameOver.setTranslateX(170);
+             GameOver.setTranslateY(100);
+                   System.out.println("Game over");
+                   center.getChildren().add(GameOver);
+                   center.getChildren().remove(player);
+                   center.getChildren().remove(clyde);
+                   center.getChildren().remove(blinky);
+                   center.getChildren().remove(pinky);
+                   center.getChildren().remove(inky);
+          }
+        return true;
     }
     
     
