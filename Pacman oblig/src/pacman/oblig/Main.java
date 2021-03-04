@@ -99,7 +99,7 @@ public class Main extends Application {
         clyde = center.getClyde();
         center.getChildren().addAll(pinky, blinky, inky, clyde);
         
-        clyde.chase(player);
+        clyde.chase(player, clyde);
         
         Scene scene = new Scene(bPane, width, height);
         

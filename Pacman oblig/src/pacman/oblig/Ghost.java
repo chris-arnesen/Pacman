@@ -51,10 +51,11 @@ public abstract class Ghost extends ImageView {
     public void setPath(String path) {this.path = path;}
     public String getPath() {return path;}
     
-    
-    protected void chase(pacman player) {
+    //Note To Self: Dersom den er lengre vekk på x-koordinat, så skal den bare gø høyre eller venstre
+    //Blir dette feil?
+    protected void chase(pacman player, Ghost ghost) {
         //pacman.setMovement();
-
+        
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
                 double pacPosX = player.getCenterX();
@@ -62,31 +63,108 @@ public abstract class Ghost extends ImageView {
 
                 double ghostX = getX();
                 double ghostY = getY();
-System.out.println(getX());
+                
                 double distanceX = Math.abs(pacPosX - getX());
                 double distanceY = Math.abs(pacPosY - getY());
-         
+                
+                
                 if (distanceX > distanceY) { 
                     if (ghostX > pacPosX) {
-                        setX(ghostX - 1);
+                        if (!collideLeftInc(ghost))
+                            setX(ghostX - 1);                      //left
+                        else if (!collideUpInc(ghost))
+                            setY(ghostY-1);
+                        else if (!collideDownInc(ghost))
+                            setY(ghostY+1);
+                        else
+                            setX(ghostX+1);
                     } 
                     else {
-                        setX(ghostX + 1);
+                        if (!collideRightInc(ghost))
+                            setX(ghostX + 1);                      //right
+                        else if (!collideUpInc(ghost))
+                            setY(ghostY-1);
+                        else if (!collideDownInc(ghost))
+                            setY(ghostY+1);
+                        else
+                            setX(ghostX-1);
                     }
                 } 
                 else {
                     if(ghostY > pacPosY) {
-                        setY(ghostY - 1);
+                        if (!collideUpInc(ghost))
+                            setY(ghostY - 1);                      //up
+                        else if (!collideRightInc(ghost))
+                            setX(ghostX + 1);
+                        else if (!collideLeftInc(ghost))
+                            setX(ghostX - 1);
+                        else
+                            setY(ghostY+1);
                     } 
                     else {
-                        setY(ghostY + 1);
-                    }
+                        if (!collideDownInc(ghost)) {
+                            setY(ghostY + 1);                      //down
+                            System.out.println("ned");
+                        }
+                            else if (!collideRightInc(ghost)) {
+                            setX(ghostX + 1);
+                            System.out.println("høyre");
+                            }
+                        else if (!collideLeftInc(ghost))
+                            setX(ghostX - 1);
+                        else {
+                            setY(ghostY - 1);
+                            System.out.println("opp");
+                        }                  
+                        }
                 }
             }
         }.start();
     }
     
+    public boolean collideRightInc(Ghost ghost) {
+        Ghost tempGhost = ghost;
+        ArrayList<Rectangle> sperringer = centerPane.getSperringer();
+        tempGhost.setX(ghost.getX()+5);
+        for (Rectangle r : sperringer) {
+            if (tempGhost.getBoundsInParent().intersects(r.getBoundsInParent()))
+                return true;
+        }
+    return false;
+    }
     
+    public boolean collideDownInc(Ghost ghost) {
+        Ghost tempGhost = ghost;
+        ArrayList<Rectangle> sperringer = centerPane.getSperringer();
+        tempGhost.setY(ghost.getY()+5);
+        for (Rectangle r : sperringer) {
+            if (tempGhost.getBoundsInParent().intersects(r.getBoundsInParent()))
+                return true;
+        }
+    return false;
+    }
+    
+    public boolean collideLeftInc(Ghost ghost) {
+        Ghost tempGhost = ghost;
+        ArrayList<Rectangle> sperringer = centerPane.getSperringer();
+        tempGhost.setX(ghost.getX()-5);
+        for (Rectangle r : sperringer) {
+            if (tempGhost.getBoundsInParent().intersects(r.getBoundsInParent()))
+                return true;
+        }
+    return false;
+    }
+    
+    public boolean collideUpInc(Ghost ghost) {
+        Ghost tempGhost = ghost;
+        ArrayList<Rectangle> sperringer = centerPane.getSperringer();
+        tempGhost.setY(ghost.getY()-5);
+        for (Rectangle r : sperringer) {
+            if (tempGhost.getBoundsInParent().intersects(r.getBoundsInParent()))
+                return true;
+        }
+    return false;
+    }
     
     
 }
