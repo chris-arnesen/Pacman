@@ -23,6 +23,7 @@ public abstract class Ghost extends ImageView {
     double y;
     double height = 20;
     double width = 20;
+    AnimationTimer timer;
     
     /*String path;
     FileInputStream stream;
@@ -56,20 +57,20 @@ public abstract class Ghost extends ImageView {
     protected void chase(pacman player, Ghost ghost) {
         //pacman.setMovement();
         
-        new AnimationTimer() {
+        timer = new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                double pacPosX = player.getCenterX();
-                double pacPosY = player.getCenterY();
+                double pacmanX = player.getCenterX();
+                double pacmanY = player.getCenterY();
 
                 double ghostX = getX();
                 double ghostY = getY();
                 
-                double distanceX = Math.abs(pacPosX - getX());
-                double distanceY = Math.abs(pacPosY - getY());
+                double dX = Math.abs(pacmanX - getX());
+                double dY = Math.abs(pacmanY - getY());
                 
                 
-                if (distanceX > distanceY) { 
-                    if (ghostX > pacPosX) {
+                if (dX > dY) { 
+                    if (ghostX > pacmanX) {
                         if (!collideLeftInc(ghost))
                             setX(ghostX - 1);                      //left
                         else if (!collideUpInc(ghost))
@@ -91,7 +92,7 @@ public abstract class Ghost extends ImageView {
                     }
                 } 
                 else {
-                    if(ghostY > pacPosY) {
+                    if(ghostY > pacmanY) {
                         if (!collideUpInc(ghost))
                             setY(ghostY - 1);                      //up
                         else if (!collideRightInc(ghost))
@@ -119,7 +120,7 @@ public abstract class Ghost extends ImageView {
                         }
                 }
             }
-        }.start();
+        };timer.start();
     }
     
     public boolean collideRightInc(Ghost ghost) {
