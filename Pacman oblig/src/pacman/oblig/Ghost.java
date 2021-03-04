@@ -24,6 +24,8 @@ public abstract class Ghost extends ImageView {
     double height = 20;
     double width = 20;
     
+    AnimationTimer timer;
+    
     /*String path;
     FileInputStream stream;
     Image image;
@@ -51,18 +53,26 @@ public abstract class Ghost extends ImageView {
     public void setPath(String path) {this.path = path;}
     public String getPath() {return path;}
     
+<<<<<<< HEAD
     //Note To Self: Dersom den er lengre vekk på x-koordinat, så skal den bare gø høyre eller venstre
     //Blir dette feil?
     protected void chase(pacman player, Ghost ghost) {
         //pacman.setMovement();
         
         new AnimationTimer() {
-            public void handle(long currentNanoTime) {
-                double pacPosX = player.getCenterX();
-                double pacPosY = player.getCenterY();
+=======
+    
+    protected void chasePacman(pacman player) {
+        //pacman.setMovement();
 
+        timer = new AnimationTimer() {
+            @Override
+>>>>>>> 429304caaba002e3e9023a8401cd6d4b9bb88bf7
+            public void handle(long currentNanoTime) {
+                
                 double ghostX = getX();
                 double ghostY = getY();
+<<<<<<< HEAD
                 
                 double distanceX = Math.abs(pacPosX - getX());
                 double distanceY = Math.abs(pacPosY - getY());
@@ -117,9 +127,35 @@ public abstract class Ghost extends ImageView {
                             System.out.println("opp");
                         }                  
                         }
+=======
+               
+                double pacmanX = player.getCenterX();
+                double pacmanY = player.getCenterY();
+                
+                
+                double dX = Math.abs(pacmanX - getX());
+                double dY = Math.abs(pacmanY - getY());
+
+         
+                if (dX > dY) { 
+                    if (ghostX < pacmanX) {
+                        setX(ghostX + 1);
+                    } 
+                    else {
+                        setX(ghostX - 1);
+                    }
+                } 
+                else {
+                    if(ghostY < pacmanY) {
+                        setY(ghostY + 1);
+                    } 
+                    else {
+                        setY(ghostY - 1);
+                    }
+>>>>>>> 429304caaba002e3e9023a8401cd6d4b9bb88bf7
                 }
             }
-        }.start();
+        };timer.start();
     }
     
     public boolean collideRightInc(Ghost ghost) {
