@@ -46,8 +46,8 @@ public abstract class Ghost extends ImageView {
         
             setX(x); //translate
             setY(y);
-            setFitHeight(10); //height
-            setFitWidth(10);   //width
+            setFitHeight(12); //height
+            setFitWidth(12);   //width
             setImage(image);
         } catch (FileNotFoundException e) {System.out.println("funker ikke");}
     }

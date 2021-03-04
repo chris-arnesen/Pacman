@@ -21,8 +21,8 @@ import javafx.util.Duration;
 public class Clyde extends Ghost {
     
     String path = "src/Bilder/ghost2-kopi.gif"; //funker ikke atm
-    double height = 20;
-    double width = 20;
+    double height;
+    double width;
     int random = 2; //Spøkelset starter med å gå til høyre //(int)(Math.random()*4)+1;
     public Clyde(double x, double y, String path) {
         super(x,y,path);

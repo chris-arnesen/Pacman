@@ -292,10 +292,8 @@ public class Main extends Application {
     // Skriv metoder her
     public boolean isCollision(pacman player) {
         for (Rectangle r : sperringer) {
-            if (player.getBoundsInParent().intersects(r.getBoundsInParent())) {
-                r.setFill(Color.RED);
+            if (player.getBoundsInParent().intersects(r.getBoundsInParent()))
                 return true;
-            }
         }
     return false;
     }

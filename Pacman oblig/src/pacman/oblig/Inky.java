@@ -12,8 +12,8 @@ package pacman.oblig;
  */
 public class Inky extends Ghost {
     
-    double height = 10;
-    double width = 10;
+    double height;
+    double width;
      
     public Inky(double x, double y, String path) {
         super(x,y,path);
