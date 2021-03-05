@@ -48,22 +48,22 @@ public class pacman extends Arc {
     this.setType(ArcType.ROUND);
     
 
-    Timeline gaping = new Timeline();
-    gaping.setCycleCount(Timeline.INDEFINITE);
-    gaping.setAutoReverse(true);
-    KeyValue vinkel = new KeyValue(
+    Timeline åpne = new Timeline();
+    åpne.setCycleCount(Timeline.INDEFINITE);
+    åpne.setAutoReverse(true);
+    KeyValue kv1 = new KeyValue(
       this.startAngleProperty(), 0);
-    KeyValue bue = new KeyValue(
+    KeyValue kv2 = new KeyValue(
       this.lengthProperty(), 360);
     KeyFrame kf = new KeyFrame(
-      Duration.millis(200), vinkel, bue);
-    gaping.getKeyFrames().add(kf);
+      Duration.millis(200), kv1, kv2);
+    åpne.getKeyFrames().add(kf);
     
     
      
-    ParallelTransition animasjon=new ParallelTransition();
-    animasjon.getChildren().add(gaping);
-    animasjon.play();
+    ParallelTransition pacman=new ParallelTransition();
+    pacman.getChildren().add(åpne);
+    pacman.play();
     
   
     }

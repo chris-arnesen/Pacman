@@ -113,10 +113,10 @@ public class Main extends Application {
         clyde = center.getClyde();
         center.getChildren().addAll(pinky, blinky, inky, clyde);
         
-        inky.chase(player, inky);
-        blinky.chase(player, blinky);
-        clyde.chase(player, clyde);
-        pinky.chase(player, pinky);
+        inky.hunt(player, inky);
+        blinky.hunt(player, blinky);
+        clyde.hunt(player, clyde);
+        pinky.hunt(player, pinky);
         Scene scene = new Scene(bPane, width, height);
         
         primaryStage.setTitle("Pacman");

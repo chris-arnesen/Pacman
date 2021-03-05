@@ -57,8 +57,8 @@ public abstract class Ghost extends ImageView {
     
     //Note To Self: Dersom den er lengre vekk på x-koordinat, så skal den bare gø høyre eller venstre
     //Blir dette feil?
-    protected void chase(pacman player, Ghost ghost) {
-        //pacman.setMovement();
+    protected void hunt(pacman player, Ghost ghost) {
+       
         
         timer = new AnimationTimer() {
             public void handle(long currentNanoTime) {
