@@ -12,7 +12,10 @@ import static javafx.scene.paint.Color.YELLOW;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
-
+/**
+ *
+ * @author christofferstrandarnesen
+ */
 public class centerPane extends Pane {
     
     
@@ -24,6 +27,9 @@ public class centerPane extends Pane {
     static Inky inky;
     static Clyde clyde;
     
+    /**
+     *
+     */
     public centerPane() {
         this.setPrefHeight(Main.getSTR()*31);
         this.setStyle("-fx-border-color: black; -fx-background-color: black;");
@@ -31,6 +37,10 @@ public class centerPane extends Pane {
         
     }
     
+    /**
+     *
+     * @return
+     */
     public Scanner getMap() {
              Scanner leser = null;
              int pointerX = 0, pointerY = 0;
@@ -112,12 +122,46 @@ public class centerPane extends Pane {
         return leser;
         } 
     
+    /**
+     *
+     * @return
+     */
     public static ArrayList<Rectangle> getSperringer() {return sperringer;} 
+
+    /**
+     *
+     * @return
+     */
     public static ArrayList<Circle> getDotter() {return dotter;}
+
+    /**
+     *
+     * @return
+     */
     public static pacman getPlayer() {return player;}
+
+    /**
+     *
+     * @return
+     */
     public static Blinky getBlinky() {return blinky;}
+
+    /**
+     *
+     * @return
+     */
     public static Pinky getPinky() {return pinky;}
+
+    /**
+     *
+     * @return
+     */
     public static Inky getInky() {return inky;}
+
+    /**
+     *
+     * @return
+     */
     public static Clyde getClyde() {return clyde;}
     
     

@@ -9,16 +9,33 @@ import javafx.util.Duration;
 
 //path: "src/Bilder/ghost2-kopi.gif"
 
+/**
+ *
+ * @author christofferstrandarnesen
+ */
+
 public class Clyde extends Ghost {
     
     String path = "src/Bilder/ghost2-kopi.gif";
     double height;
     double width;
     int random = 2;
+
+    /**
+     *
+     * @param x
+     * @param y
+     * @param path
+     */
     public Clyde(double x, double y, String path) {
         super(x,y,path);
     }
     
+    /**
+     *
+     * @param player
+     * @param ghost
+     */
     public void hunt(pacman player, Ghost ghost) {
         Timeline tl = new Timeline();
         KeyFrame kf = new KeyFrame(Duration.millis(30),
@@ -54,8 +71,11 @@ public class Clyde extends Ghost {
         tl.play();
     } 
     
-    
-    
+    /**
+     *
+     * @param ghost
+     * @return
+     */
     public boolean isCollisionGhost(Ghost ghost) {
         ArrayList<Rectangle> sperringer = centerPane.getSperringer();
         for (Rectangle r : sperringer) {

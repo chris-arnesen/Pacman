@@ -9,15 +9,32 @@ import javafx.util.Duration;
 
 //Path: "src/Bilder/YMXv.gif"
 
+/**
+ *
+ * @author christofferstrandarnesen
+ */
+
 public class Pinky extends Ghost {
     
     double height;
     double width;
     double random = 1;
+
+    /**
+     *
+     * @param x
+     * @param y
+     * @param path
+     */
     public Pinky(double x, double y, String path) {
         super(x,y,path);
     }
     
+    /**
+     *
+     * @param player
+     * @param ghost
+     */
     public void hunt(pacman player, Ghost ghost) {
         Timeline tl = new Timeline();
         KeyFrame kf = new KeyFrame(Duration.millis(30),
@@ -53,8 +70,11 @@ public class Pinky extends Ghost {
         tl.play();
     } 
     
-    
-    
+    /**
+     *
+     * @param ghost
+     * @return
+     */
     public boolean isCollisionGhost(Ghost ghost) {
         ArrayList<Rectangle> sperringer = centerPane.getSperringer();
         for (Rectangle r : sperringer) {

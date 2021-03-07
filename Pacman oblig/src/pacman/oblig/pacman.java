@@ -17,12 +17,20 @@ import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
-
+/**
+ *
+ * @author christofferstrandarnesen
+ */
 public class pacman extends Arc {
     
     double x, y;
     double radius = Main.getSTR()/2.5;
     
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public pacman(double x, double y) {
         
         this.x = x;
@@ -59,11 +67,34 @@ public class pacman extends Arc {
   
     }
     
+    /**
+     *
+     * @param x
+     */
     public void setPacmanX(double x) {this.x = x;}
+
+    /**
+     *
+     * @param y
+     */
     public void setPacmanY(double y) {this.y = y;}
     
+    /**
+     *
+     * @return
+     */
     public double getPacmanX() {return x;}
+
+    /**
+     *
+     * @return
+     */
     public double getPacmanY() {return y;}
+
+    /**
+     *
+     * @return
+     */
     public double getPacmanRadius() {return radius;}
      
     
