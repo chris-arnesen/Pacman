@@ -406,6 +406,10 @@ public class Main extends Application {
         return false;
     }
     
+    /**
+     *
+     * @param player
+     */
     public void removePowerUp(pacman player) {
         for (Circle c : powerups) {
             if (player.getBoundsInParent().intersects(c.getBoundsInParent()))
@@ -413,6 +417,11 @@ public class Main extends Application {
         }
     }
     
+    /**
+     *
+     * @param player
+     * @return
+     */
     public boolean powerUp(pacman player) {
         for (Circle c : powerups) {
             if (player.getBoundsInParent().intersects(c.getBoundsInParent())) {
