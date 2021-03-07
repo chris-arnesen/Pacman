@@ -6,13 +6,20 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-
+/**
+ *
+ * @author christofferstrandarnesen
+ */
 public class topPane extends Pane {
     
     int poeng;
     Text scoreText = getScore();
     Text levelText = getLevel();
     
+    /**
+     *
+     * @param poeng
+     */
     public topPane(int poeng) {
         this.poeng = poeng;
         this.setPrefHeight(50);
@@ -20,6 +27,10 @@ public class topPane extends Pane {
         this.getChildren().addAll(scoreText, levelText);
     }
     
+    /**
+     *
+     * @return
+     */
     public Text getScore() {
             Text text = new Text("Score: " + poeng);
         text.setFont(Font.font("Arial", 20));
@@ -29,6 +40,10 @@ public class topPane extends Pane {
         return text;
     }
     
+    /**
+     *
+     * @return
+     */
     public Text getLevel() {
             Text text = new Text("Level: ");
         text.setFont(Font.font("Arial", 20));
@@ -38,6 +53,10 @@ public class topPane extends Pane {
         return text;
         }
     
+    /**
+     *
+     * @param poeng
+     */
     public void setScore(int poeng) {
         scoreText.setText("Score: " + poeng);
     }

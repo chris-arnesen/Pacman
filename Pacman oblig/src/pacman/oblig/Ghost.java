@@ -8,7 +8,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
-
+/**
+ *
+ * @author christofferstrandarnesen
+ */
 public abstract class Ghost extends ImageView {
     
     double x;
@@ -20,10 +23,24 @@ public abstract class Ghost extends ImageView {
     
     String path;//"src/Bilder/red.gif";
     
+    /**
+     *
+     * @return
+     */
     public double getGhostX() {return x;}
+
+    /**
+     *
+     * @return
+     */
     public double getGhostY() {return y;}
     
-    
+    /**
+     *
+     * @param x
+     * @param y
+     * @param path
+     */
     public Ghost(double x, double y, String path) {
         this.x = x;
         this.y = y;
@@ -40,11 +57,24 @@ public abstract class Ghost extends ImageView {
         } catch (FileNotFoundException e) {System.out.println("funker ikke");}
     }
     
+    /**
+     *
+     * @param path
+     */
     public void setPath(String path) {this.path = path;}
+
+    /**
+     *
+     * @return
+     */
     public String getPath() {return path;}
     
-    
-    protected void hunt(pacman player, Ghost ghost) { 
+    /**
+     *
+     * @param player
+     * @param ghost
+     */
+    public void hunt(pacman player, Ghost ghost) { 
         timer = new AnimationTimer() {
             public void handle(long currentNanoTime) {
                 double pacmanX = player.getCenterX();
@@ -108,6 +138,11 @@ public abstract class Ghost extends ImageView {
         };timer.start();
     }
     
+    /**
+     *
+     * @param ghost
+     * @return
+     */
     public boolean collideRightInc(Ghost ghost) {
         Rectangle tempBox = new Rectangle(0,0,10,10);
         tempBox.setX(ghost.getX());
@@ -121,6 +156,11 @@ public abstract class Ghost extends ImageView {
     return false;
     }
     
+    /**
+     *
+     * @param ghost
+     * @return
+     */
     public boolean collideDownInc(Ghost ghost) {
         Rectangle tempBox = new Rectangle(0,0,10,10);
         tempBox.setX(ghost.getX());
@@ -134,6 +174,11 @@ public abstract class Ghost extends ImageView {
     return false;
     }
     
+    /**
+     *
+     * @param ghost
+     * @return
+     */
     public boolean collideLeftInc(Ghost ghost) {
         Rectangle tempBox = new Rectangle(0,0,10,10);
         tempBox.setX(ghost.getX());
@@ -147,6 +192,11 @@ public abstract class Ghost extends ImageView {
     return false;
     }
     
+    /**
+     *
+     * @param ghost
+     * @return
+     */
     public boolean collideUpInc(Ghost ghost) {
         Rectangle tempBox = new Rectangle(0,0,10,10);
         tempBox.setX(ghost.getX());

@@ -37,7 +37,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-
+/**
+ *
+ * @author christofferstrandarnesen
+ */
 public class Main extends Application {
     
     static int STR    = 20;
@@ -71,6 +74,12 @@ public class Main extends Application {
     Timeline ned = new Timeline();
     Timeline høyre = new Timeline();
     
+    /**
+     *
+     * @param primaryStage
+     * @throws FileNotFoundException
+     * @throws InterruptedException
+     */
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException, InterruptedException {
         
@@ -250,6 +259,12 @@ public class Main extends Application {
     }
     
     // Skriv metoder her
+
+    /**
+     *
+     * @param player
+     * @return
+     */
     public boolean isCollision(pacman player) {
         for (Rectangle r : sperringer) {
             if (player.getBoundsInParent().intersects(r.getBoundsInParent()))
@@ -258,6 +273,10 @@ public class Main extends Application {
     return false;
     }
     
+    /**
+     *
+     * @param player
+     */
     public void hitByGhost(pacman player) {
         if (player.getBoundsInParent().intersects(clyde.getBoundsInParent()) ||
             player.getBoundsInParent().intersects(blinky.getBoundsInParent()) ||
@@ -284,6 +303,11 @@ public class Main extends Application {
         }
     }
     
+    /**
+     *
+     * @param ghost
+     * @return
+     */
     public boolean isCollisionGhost(Ghost ghost) {
         ArrayList<Rectangle> sperringer = center.getSperringer();
         for (Rectangle r : sperringer) {
@@ -293,6 +317,11 @@ public class Main extends Application {
     return false;
     }
     
+    /**
+     *
+     * @param ghost
+     * @return
+     */
     public boolean almostCollision(Ghost ghost) {
         Ghost tempGhost = ghost;
         tempGhost.setX(ghost.getX()+3);
@@ -303,8 +332,11 @@ public class Main extends Application {
     return false;
     }
     
-    
-    
+    /**
+     *
+     * @param player
+     * @return
+     */
     public boolean dø(pacman player) {
         for (Circle c : dotter) {
             if ( player.getBoundsInParent().intersects(c.getBoundsInParent()) ) {
@@ -315,6 +347,11 @@ public class Main extends Application {
         }
         return false;
     }
+
+    /**
+     *
+     * @return
+     */
     public boolean gameOver() {
          if(alleLivIndeks == -1) {
              
@@ -333,9 +370,22 @@ public class Main extends Application {
         return true;
     }
     
-    
+    /**
+     *
+     * @return
+     */
     public static double getWidth()  {return width;}
+
+    /**
+     *
+     * @return
+     */
     public static double getSTR()    {return STR;}
+
+    /**
+     *
+     * @return
+     */
     public static double getHeight() {return height;}
    
        
