@@ -3,6 +3,9 @@ package pacman.oblig;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,6 +23,7 @@ public abstract class Ghost extends ImageView {
     double width = 12;
     AnimationTimer timer;
     
+    Image ghostImage;
     
     String path;//"src/Bilder/red.gif";
     
@@ -54,8 +58,19 @@ public abstract class Ghost extends ImageView {
             setFitHeight(height); 
             setFitWidth(width);   
             setImage(image);
-        } catch (FileNotFoundException e) {System.out.println("funker ikke");}
+            ghostImage = image;
+        } catch (FileNotFoundException e) {System.out.println("finner ikke fil");}
     }
+    
+    public void setImage() {
+        String blueGhostPath = "src/Bilder/iHG.gif";
+        try {
+            FileInputStream blueGhostStream = new FileInputStream(blueGhostPath);
+            Image blueGhostImage = new Image(blueGhostStream);
+            this.setImage(blueGhostImage);
+        } catch (FileNotFoundException ed) {System.out.println("dø");}   
+    }
+    public void returnToNormal() {this.setImage(ghostImage);}
     
     /**
      *
@@ -136,6 +151,7 @@ public abstract class Ghost extends ImageView {
                 }
             }
         };timer.start();
+        
     }
     
     /**

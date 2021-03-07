@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.Animation;
@@ -48,7 +50,7 @@ public class Main extends Application {
     static int height = (STR*31)+100;
     
     int alleLivIndeks = 2;
-    
+    static boolean frightened = false;
     
     int poeng = 0;
     double random = Math.random();
@@ -56,6 +58,7 @@ public class Main extends Application {
     static ArrayList<Rectangle> sperringer = centerPane.getSperringer();
     static ArrayList<Circle> dotter = centerPane.getDotter();
     static ArrayList<pacman> alleLiv = new ArrayList<>();
+    static ArrayList<Circle> powerups = centerPane.getPowerups();
     //Diverse bokser
     BorderPane bPane;
     topPane top = new topPane(poeng);
@@ -149,6 +152,7 @@ public class Main extends Application {
              
              if (gameWon()) 
                  opp.stop();
+             removePowerUp(player);
        });
        opp.getKeyFrames().add(oppkf);
        opp.setCycleCount(Animation.INDEFINITE);
@@ -170,6 +174,7 @@ public class Main extends Application {
             
             if (gameWon()) 
                  venstre.stop();
+            removePowerUp(player);
        });
        venstre.getKeyFrames().add(venstrekf);
        venstre.setCycleCount(Animation.INDEFINITE);
@@ -189,6 +194,7 @@ public class Main extends Application {
             
             if (gameWon()) 
                  ned.stop();
+            removePowerUp(player);
        });
        ned.getKeyFrames().add(nedkf);
        ned.setCycleCount(Animation.INDEFINITE);
@@ -210,6 +216,7 @@ public class Main extends Application {
                
                if (gameWon()) 
                  høyre.stop();
+               removePowerUp(player);
        });
        høyre.getKeyFrames().add(høyrekf);
        høyre.setCycleCount(Animation.INDEFINITE);
@@ -254,20 +261,35 @@ public class Main extends Application {
     }
     
 });
-   opp.stop();
-   ned.stop();
-   venstre.stop();
-   høyre.stop();
-   
-  
-     
-   
-   
-  
+    opp.stop();
+    ned.stop();
+    venstre.stop();
+    høyre.stop();
     
-       
-        System.out.println("Pacman - X: " + player.getCenterX() + " Y: " + player.getCenterY());
-        System.out.println("Clyde - X: " + clyde.getX() + " Y: " + clyde.getY());
+    Timer timer = new Timer(true);
+    
+    TimerTask task = new TimerTask() 
+    {
+    public void run()
+    {   
+        if ( powerUp(player) ) {
+            frightened = true;
+            inky.setImage();
+            pinky.setImage();
+            blinky.setImage();
+            clyde.setImage();
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException ex) {System.out.println("Dette funka dårlig du");}
+            frightened = false;
+            inky.returnToNormal();
+            pinky.returnToNormal();
+            blinky.returnToNormal();
+            clyde.returnToNormal();
+        }
+    }
+    };
+    timer.scheduleAtFixedRate(task, 0, 30);
        
     }
     
@@ -295,6 +317,7 @@ public class Main extends Application {
             player.getBoundsInParent().intersects(blinky.getBoundsInParent()) ||
             player.getBoundsInParent().intersects(inky.getBoundsInParent()) ||
             player.getBoundsInParent().intersects(pinky.getBoundsInParent())) {
+            if (!frightened) {
                bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
                    alleLivIndeks--;
                    opp.stop();
@@ -313,6 +336,28 @@ public class Main extends Application {
                    clyde.setX(clyde.getGhostX());
                    clyde.setY(clyde.getGhostY());
                    gameOver();
+            } else {
+                if ( player.getBoundsInParent().intersects( inky.getBoundsInParent() ) ) {
+                    inky.setX(230);
+                    inky.setY(280);
+                    inky.returnToNormal();
+                }
+                if ( player.getBoundsInParent().intersects( pinky.getBoundsInParent() ) ) {
+                    pinky.setX(270);
+                    pinky.setY(280);
+                    inky.returnToNormal();
+                }
+                if ( player.getBoundsInParent().intersects( blinky.getBoundsInParent() ) ) {
+                    blinky.setX(310);
+                    blinky.setY(280);
+                    inky.returnToNormal();
+                }
+                if ( player.getBoundsInParent().intersects( clyde.getBoundsInParent() ) ) {
+                    clyde.setX(270);
+                    clyde.setY(220);
+                    inky.returnToNormal();
+                }
+            }
         }
     }
     
@@ -360,6 +405,24 @@ public class Main extends Application {
         }
         return false;
     }
+    
+    public void removePowerUp(pacman player) {
+        for (Circle c : powerups) {
+            if (player.getBoundsInParent().intersects(c.getBoundsInParent()))
+                center.getChildren().remove(c);
+        }
+    }
+    
+    public boolean powerUp(pacman player) {
+        for (Circle c : powerups) {
+            if (player.getBoundsInParent().intersects(c.getBoundsInParent())) {
+                return true;
+            }
+        }
+    return false;
+    }
+    
+    
 
     /**
      *
@@ -405,6 +468,8 @@ public class Main extends Application {
          }
         return false;
     }
+    
+    
     
     /**
      *

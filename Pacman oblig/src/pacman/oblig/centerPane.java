@@ -21,6 +21,7 @@ public class centerPane extends Pane {
     
     static ArrayList<Rectangle> sperringer = new ArrayList<>(); 
     static ArrayList<Circle> dotter = new ArrayList<>(); 
+    static ArrayList<Circle> powerups = new ArrayList<>();
     static pacman player; 
     static Blinky blinky;
     static Pinky pinky;
@@ -75,6 +76,7 @@ public class centerPane extends Pane {
                         {
                             Circle s = new Circle(pointerX+(STR/2), pointerY+(STR/2), 5, YELLOW);
                             this.getChildren().add(s);
+                            powerups.add(s);
                             pointerX+=STR;
                             break;
                         }
@@ -164,6 +166,6 @@ public class centerPane extends Pane {
      */
     public static Clyde getClyde() {return clyde;}
     
-    
+    public static ArrayList<Circle> getPowerups() {return powerups;}
     
 }
