@@ -141,7 +141,7 @@ public class Main extends Application {
                opp.pause();
                player.setCenterY(player.getCenterY()+5);
            }
-           if (dø(player)) {
+           if (removeDotter(player)) {
                poeng++;
                top.setScore(poeng);
            }
@@ -160,7 +160,7 @@ public class Main extends Application {
                 venstre.pause();
                 player.setCenterX(player.getCenterX()+5);
             }
-            if (dø(player)) {
+            if (removeDotter(player)) {
                poeng++;
                top.setScore(poeng);
             }
@@ -181,7 +181,7 @@ public class Main extends Application {
                 ned.pause();
                 player.setCenterY(player.getCenterY()-5);
             }
-            if (dø(player)) {
+            if (removeDotter(player)) {
                poeng++;
                top.setScore(poeng);
             }
@@ -200,7 +200,7 @@ public class Main extends Application {
                    høyre.pause();
                    player.setCenterX(player.getCenterX()-5);
                }
-               if (dø(player)) {
+               if (removeDotter(player)) {
                    poeng++;
                    top.setScore(poeng);
                }
@@ -350,7 +350,7 @@ public class Main extends Application {
      * @param player
      * @return
      */
-    public boolean dø(pacman player) {
+    public boolean removeDotter(pacman player) {
         for (Circle c : dotter) {
             if ( player.getBoundsInParent().intersects(c.getBoundsInParent()) ) {
                 center.getChildren().remove(c);
