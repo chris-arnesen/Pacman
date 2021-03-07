@@ -49,6 +49,7 @@ public class Main extends Application {
     
     int alleLivIndeks = 2;
     
+    
     int poeng = 0;
     double random = Math.random();
     
@@ -61,6 +62,7 @@ public class Main extends Application {
     bottomPane bottom = new bottomPane();
     centerPane center = new centerPane();
     Label GameOver = new Label("Game Over...");
+    Label YouWon = new Label("You Won!");
     
     
     pacman player;
@@ -144,6 +146,8 @@ public class Main extends Application {
                top.setScore(poeng);
            }
              hitByGhost(player);
+             
+             gameWon();
        });
        opp.getKeyFrames().add(oppkf);
        opp.setCycleCount(Animation.INDEFINITE);
@@ -162,6 +166,8 @@ public class Main extends Application {
             if (player.getCenterX() < 0)
                    player.setCenterX(getWidth());
             hitByGhost(player);
+            
+            //gameWon();
        });
        venstre.getKeyFrames().add(venstrekf);
        venstre.setCycleCount(Animation.INDEFINITE);
@@ -178,6 +184,8 @@ public class Main extends Application {
                top.setScore(poeng);
             }
             hitByGhost(player);
+            
+            //gameWon();
        });
        ned.getKeyFrames().add(nedkf);
        ned.setCycleCount(Animation.INDEFINITE);
@@ -196,6 +204,8 @@ public class Main extends Application {
                if (player.getCenterX() > getWidth())
                    player.setCenterX(0);
                hitByGhost(player);
+               
+               //gameWon();
        });
        høyre.getKeyFrames().add(høyrekf);
        høyre.setCycleCount(Animation.INDEFINITE);
@@ -206,6 +216,7 @@ public class Main extends Application {
        
    scene.setOnKeyPressed(e -> {        
     switch (e.getCode()) {
+        
         
     case UP:
         opp.play();
@@ -235,9 +246,7 @@ public class Main extends Application {
         ned.stop();
         player.setRotate(0);
         break;
-   case SPACE:
-        ned.stop();
-        break;
+   
     }
     
 });
@@ -361,6 +370,28 @@ public class Main extends Application {
              GameOver.setTranslateY(100);
                    System.out.println("Game over");
                    center.getChildren().add(GameOver);
+                   center.getChildren().remove(player);
+                   center.getChildren().remove(clyde);
+                   center.getChildren().remove(blinky);
+                   center.getChildren().remove(pinky);
+                   center.getChildren().remove(inky);
+          }
+        return true;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public boolean gameWon() {
+         if(dotter.isEmpty()) {
+             
+             YouWon.setStyle("-fx-text-fill:YELLOW; -fx-font-size: 40;");
+             YouWon.setPrefSize(500,500);
+             YouWon.setTranslateX(185);
+             YouWon.setTranslateY(100);
+                   System.out.println("You Won!!!");
+                   center.getChildren().add(YouWon);
                    center.getChildren().remove(player);
                    center.getChildren().remove(clyde);
                    center.getChildren().remove(blinky);
