@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pacman.oblig;
 
 import javafx.animation.KeyFrame;
@@ -22,10 +17,6 @@ import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
-/**
- *
- * @author christofferstrandarnesen
- */
 
 public class pacman extends Arc {
     
@@ -68,7 +59,6 @@ public class pacman extends Arc {
   
     }
     
-    //Set- og get-metoder
     public void setPacmanX(double x) {this.x = x;}
     public void setPacmanY(double y) {this.y = y;}
     

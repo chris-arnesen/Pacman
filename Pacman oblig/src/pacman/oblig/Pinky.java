@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pacman.oblig;
 
 import java.util.ArrayList;
@@ -12,11 +7,8 @@ import javafx.animation.Timeline;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+//Path: "src/Bilder/YMXv.gif"
 
-/**
- * Path: "src/Bilder/YMXv.gif"
- * @author christofferstrandarnesen
- */
 public class Pinky extends Ghost {
     
     double height;
@@ -26,8 +18,7 @@ public class Pinky extends Ghost {
         super(x,y,path);
     }
     
-    public void chase(pacman player, Ghost ghost) {
-        //int random = (int)(Math.random()*3)+1;
+    public void hunt(pacman player, Ghost ghost) {
         Timeline tl = new Timeline();
         KeyFrame kf = new KeyFrame(Duration.millis(30),
                 (evt) -> {
@@ -55,7 +46,7 @@ public class Pinky extends Ghost {
                         setX(getX()+5);
                     } else
                         setX(getX()-1);
-                } //this istedet for ghost
+                }
             });
         tl.getKeyFrames().add(kf);
         tl.setCycleCount(Animation.INDEFINITE);

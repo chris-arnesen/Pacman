@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pacman.oblig;
 
 import java.io.FileInputStream;
@@ -13,22 +8,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
-/**
- *
- * @author christofferstrandarnesen
- */
+
 public abstract class Ghost extends ImageView {
     
     double x;
     double y;
-    double height = 20;
-    double width = 20;
+    double height = 12;
+    double width = 12;
     AnimationTimer timer;
     
-    /*String path;
-    FileInputStream stream;
-    Image image;
-    ImageView view;*/
     
     String path;//"src/Bilder/red.gif";
     
@@ -41,13 +29,13 @@ public abstract class Ghost extends ImageView {
         this.y = y;
         this.path = path;
         try {
-            FileInputStream stream = new FileInputStream(getPath()); //path
+            FileInputStream stream = new FileInputStream(getPath()); 
             Image image = new Image(stream);
         
-            setX(x); //translate
+            setX(x);
             setY(y);
-            setFitHeight(12); //height
-            setFitWidth(12);   //width
+            setFitHeight(height); 
+            setFitWidth(width);   
             setImage(image);
         } catch (FileNotFoundException e) {System.out.println("funker ikke");}
     }
@@ -55,11 +43,8 @@ public abstract class Ghost extends ImageView {
     public void setPath(String path) {this.path = path;}
     public String getPath() {return path;}
     
-    //Note To Self: Dersom den er lengre vekk på x-koordinat, så skal den bare gø høyre eller venstre
-    //Blir dette feil?
-    protected void hunt(pacman player, Ghost ghost) {
-       
-        
+    
+    protected void hunt(pacman player, Ghost ghost) { 
         timer = new AnimationTimer() {
             public void handle(long currentNanoTime) {
                 double pacmanX = player.getCenterX();
@@ -74,101 +59,108 @@ public abstract class Ghost extends ImageView {
                 
                 if (dX > dY) { 
                     if (ghostX > pacmanX) {
-                        if (!collideLeftInc(ghost))
-                            setX(ghostX - 1);                      //left
-                        else if (!collideUpInc(ghost))
-                            setY(ghostY-1);
+                        if (!collideLeftInc(ghost)){
+                            setX(getX() - 1);                      
+                        }    else if (!collideUpInc(ghost))
+                            setY(getY()-1);
                         else if (!collideDownInc(ghost))
-                            setY(ghostY+1);
+                            setY(getY()+1);
                         else
-                            setX(ghostX+1);
+                            setX(getX()+1);
                     } 
                     else {
                         if (!collideRightInc(ghost))
-                            setX(ghostX + 1);                      //right
+                            setX(getX() + 1);                      
                         else if (!collideUpInc(ghost))
-                            setY(ghostY-1);
+                            setY(getY()-1);
                         else if (!collideDownInc(ghost))
-                            setY(ghostY+1);
+                            setY(getY()+1);
                         else
-                            setX(ghostX-1);
+                            setX(getX()-1);
                     }
                 } 
                 else {
                     if(ghostY > pacmanY) {
                         if (!collideUpInc(ghost))
-                            setY(ghostY - 1);                      //up
+                            setY(getY() - 1);                      
                         else if (!collideRightInc(ghost))
-                            setX(ghostX + 1);
+                            setX(getX() + 1);
                         else if (!collideLeftInc(ghost))
-                            setX(ghostX - 1);
+                            setX(getX() - 1);
                         else
-                            setY(ghostY+1);
+                            setY(getY()+1);
                     } 
                     else {
                         if (!collideDownInc(ghost)) {
-                            setY(ghostY + 1);                      //down
-                            //System.out.println("ned");
+                            setY(getY() + 1);                      
                         }
                             else if (!collideRightInc(ghost)) {
-                            setX(ghostX + 1);
-                            //System.out.println("høyre");
+                            setX(getX() + 1);
                             }
                         else if (!collideLeftInc(ghost))
-                            setX(ghostX - 1);
+                            setX(getX() - 1);
                         else {
-                            setY(ghostY - 1);
-                            //System.out.println("opp");
+                            setY(getY() - 1);
                         }                  
-                        }
+                    }
                 }
             }
         };timer.start();
     }
     
     public boolean collideRightInc(Ghost ghost) {
-        Ghost tempGhost = ghost;
+        Rectangle tempBox = new Rectangle(0,0,10,10);
+        tempBox.setX(ghost.getX());
+        tempBox.setY(ghost.getY());
         ArrayList<Rectangle> sperringer = centerPane.getSperringer();
-        tempGhost.setX(ghost.getX()+5);
+        tempBox.setX(ghost.getX()+5);
         for (Rectangle r : sperringer) {
-            if (tempGhost.getBoundsInParent().intersects(r.getBoundsInParent()))
+            if (tempBox.getBoundsInParent().intersects(r.getBoundsInParent()))
                 return true;
         }
     return false;
     }
     
     public boolean collideDownInc(Ghost ghost) {
-        Ghost tempGhost = ghost;
+        Rectangle tempBox = new Rectangle(0,0,10,10);
+        tempBox.setX(ghost.getX());
+        tempBox.setY(ghost.getY());
         ArrayList<Rectangle> sperringer = centerPane.getSperringer();
-        tempGhost.setY(ghost.getY()+5);
+        tempBox.setY(ghost.getY()+5);
         for (Rectangle r : sperringer) {
-            if (tempGhost.getBoundsInParent().intersects(r.getBoundsInParent()))
+            if (tempBox.getBoundsInParent().intersects(r.getBoundsInParent()))
                 return true;
         }
     return false;
     }
     
     public boolean collideLeftInc(Ghost ghost) {
-        Ghost tempGhost = ghost;
+        Rectangle tempBox = new Rectangle(0,0,10,10);
+        tempBox.setX(ghost.getX());
+        tempBox.setY(ghost.getY());
         ArrayList<Rectangle> sperringer = centerPane.getSperringer();
-        tempGhost.setX(ghost.getX()-5);
+        tempBox.setX(ghost.getX()-5);
         for (Rectangle r : sperringer) {
-            if (tempGhost.getBoundsInParent().intersects(r.getBoundsInParent()))
+            if (tempBox.getBoundsInParent().intersects(r.getBoundsInParent()))
                 return true;
         }
     return false;
     }
     
     public boolean collideUpInc(Ghost ghost) {
-        Ghost tempGhost = ghost;
+        Rectangle tempBox = new Rectangle(0,0,10,10);
+        tempBox.setX(ghost.getX());
+        tempBox.setY(ghost.getY());
         ArrayList<Rectangle> sperringer = centerPane.getSperringer();
-        tempGhost.setY(ghost.getY()-5);
+        tempBox.setY(ghost.getY()-5);
         for (Rectangle r : sperringer) {
-            if (tempGhost.getBoundsInParent().intersects(r.getBoundsInParent()))
+            if (tempBox.getBoundsInParent().intersects(r.getBoundsInParent()))
                 return true;
         }
     return false;
     }
+    
+    
     
     
 }

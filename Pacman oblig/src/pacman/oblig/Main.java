@@ -1,14 +1,11 @@
-/* barmen
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pacman.oblig;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -40,13 +37,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-/**
- *
- * @author christofferstrandarnesen
- */
+
 public class Main extends Application {
     
-    //Deklarasjoner
     static int STR    = 20;
     static int width  = STR*28;
     static int height = (STR*31)+100;
@@ -79,7 +72,7 @@ public class Main extends Application {
     Timeline høyre = new Timeline();
     
     @Override
-    public void start(Stage primaryStage) throws FileNotFoundException {
+    public void start(Stage primaryStage) throws FileNotFoundException, InterruptedException {
         
         
       
@@ -93,7 +86,7 @@ public class Main extends Application {
       
       
         
-        // Oppretter arraylist over liv, legger til tre stk liv
+        // Legger til tre stk liv i ArrayListen: alleLiv
         int livX = 30, livY = 25;
         
         for (int i = 0; i <= alleLivIndeks; i++) { 
@@ -124,13 +117,9 @@ public class Main extends Application {
         primaryStage.show();
     //Her kommer animasjon for spøkelsene
                
-       
+    
      //Her kommer animasjon
-       /*Timeline opp = new Timeline();
-       Timeline venstre = new Timeline();
-       Timeline ned = new Timeline();
-       Timeline høyre = new Timeline();
-       */
+       
        final int speed = 30;
        
        // KeyFrames // KeyFrames // KeyFrames // KeyFrames //
@@ -144,18 +133,8 @@ public class Main extends Application {
            if (dø(player)) {
                poeng++;
                top.setScore(poeng);
-               }
-             /*if (hitByGhost(player)) {
-                 bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
-                 alleLivIndeks--;
-                 
-                 gameOver();
-                 
-                 opp.stop();
-               }*/
+           }
              hitByGhost(player);
-             //gameOver();
-           
        });
        opp.getKeyFrames().add(oppkf);
        opp.setCycleCount(Animation.INDEFINITE);
@@ -170,17 +149,8 @@ public class Main extends Application {
             if (dø(player)) {
                poeng++;
                top.setScore(poeng);
-               }
-              /*if (hitByGhost(player)) {
-                  bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
-                  alleLivIndeks--;
-                  
-                   gameOver();
-                  
-                  venstre.stop();
-               }*/
+            }
               hitByGhost(player);
-              //gameOver();
        });
        venstre.getKeyFrames().add(venstrekf);
        venstre.setCycleCount(Animation.INDEFINITE);
@@ -195,16 +165,8 @@ public class Main extends Application {
             if (dø(player)) {
                poeng++;
                top.setScore(poeng);
-               }
-              /*if (hitByGhost(player)) {
-                  bottom.getChildren().remove(alleLiv.get(alleLivIndeks));
-                  alleLivIndeks--; 
-                  
-                  gameOver();
-                  ned.stop();
-               }*/
+            }
               hitByGhost(player);
-              //gameOver();
        });
        ned.getKeyFrames().add(nedkf);
        ned.setCycleCount(Animation.INDEFINITE);
@@ -217,16 +179,10 @@ public class Main extends Application {
                    player.setCenterX(player.getCenterX()-5);
                }
                if (dø(player)) {
-               poeng++;
-               top.setScore(poeng);
+                   poeng++;
+                   top.setScore(poeng);
                }
                hitByGhost(player);
-                   
-                   
-                   //gameOver();
-                   //høyre.stop();
-               
-               
        });
        høyre.getKeyFrames().add(høyrekf);
        høyre.setCycleCount(Animation.INDEFINITE);
@@ -374,18 +330,11 @@ public class Main extends Application {
     }
     
     
-    
-    
-    //Get-metoder for forskjellige størrelser
     public static double getWidth()  {return width;}
     public static double getSTR()    {return STR;}
     public static double getHeight() {return height;}
    
        
-        
-       
-    
-        
         
     /**
      * @param args the command line arguments
