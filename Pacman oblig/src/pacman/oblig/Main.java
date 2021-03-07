@@ -150,7 +150,9 @@ public class Main extends Application {
                poeng++;
                top.setScore(poeng);
             }
-              hitByGhost(player);
+            if (player.getCenterX() < 0)
+                   player.setCenterX(getWidth());
+            hitByGhost(player);
        });
        venstre.getKeyFrames().add(venstrekf);
        venstre.setCycleCount(Animation.INDEFINITE);
@@ -166,7 +168,7 @@ public class Main extends Application {
                poeng++;
                top.setScore(poeng);
             }
-              hitByGhost(player);
+            hitByGhost(player);
        });
        ned.getKeyFrames().add(nedkf);
        ned.setCycleCount(Animation.INDEFINITE);
@@ -182,6 +184,8 @@ public class Main extends Application {
                    poeng++;
                    top.setScore(poeng);
                }
+               if (player.getCenterX() > getWidth())
+                   player.setCenterX(0);
                hitByGhost(player);
        });
        høyre.getKeyFrames().add(høyrekf);
