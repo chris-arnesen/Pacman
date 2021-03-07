@@ -147,7 +147,8 @@ public class Main extends Application {
            }
              hitByGhost(player);
              
-             gameWon();
+             if (gameWon()) 
+                 opp.stop();
        });
        opp.getKeyFrames().add(oppkf);
        opp.setCycleCount(Animation.INDEFINITE);
@@ -167,7 +168,8 @@ public class Main extends Application {
                    player.setCenterX(getWidth());
             hitByGhost(player);
             
-            //gameWon();
+            if (gameWon()) 
+                 venstre.stop();
        });
        venstre.getKeyFrames().add(venstrekf);
        venstre.setCycleCount(Animation.INDEFINITE);
@@ -185,7 +187,8 @@ public class Main extends Application {
             }
             hitByGhost(player);
             
-            //gameWon();
+            if (gameWon()) 
+                 ned.stop();
        });
        ned.getKeyFrames().add(nedkf);
        ned.setCycleCount(Animation.INDEFINITE);
@@ -205,7 +208,8 @@ public class Main extends Application {
                    player.setCenterX(0);
                hitByGhost(player);
                
-               //gameWon();
+               if (gameWon()) 
+                 høyre.stop();
        });
        høyre.getKeyFrames().add(høyrekf);
        høyre.setCycleCount(Animation.INDEFINITE);
@@ -397,8 +401,9 @@ public class Main extends Application {
                    center.getChildren().remove(blinky);
                    center.getChildren().remove(pinky);
                    center.getChildren().remove(inky);
-          }
-        return true;
+             return true; 
+         }
+        return false;
     }
     
     /**
